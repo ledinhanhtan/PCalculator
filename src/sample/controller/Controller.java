@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import sample.model.Calculator;
-import sample.model.NumberLabel;
 
 
 public class Controller {
@@ -22,10 +21,22 @@ public class Controller {
 
     private Calculator calculator;
 
+    @FXML
+    public void initialize() {
+        calculator = new Calculator();
+        calculator.setup(flowPane);
+    }
+
+    @FXML
     public void number(ActionEvent e) {
         Button button = (Button) e.getSource();
-        NumberLabel lbl = new NumberLabel(button.getText());
-        flowPane.getChildren().add(lbl);
+        calculator.writeNumber(button.getText());
+    }
+
+    @FXML
+    public void operator(ActionEvent e) {
+        Button button = (Button) e.getSource();
+        calculator.writeOperator(button.getText());
     }
 
 //    public void keyEventHandler(KeyEvent keyEvent) throws ScriptException {
