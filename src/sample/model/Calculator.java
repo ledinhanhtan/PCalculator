@@ -57,6 +57,6 @@ public class Calculator {
     }
 
     public void delete() {
-
+        expression.delete();
     }
 }

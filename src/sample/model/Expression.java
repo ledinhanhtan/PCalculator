@@ -33,4 +33,20 @@ class Expression extends FlowPane {
         }
         return expr.toString();
     }
+
+    void delete() {
+        if (labels.size() > 0) {
+            SmartLabel lastLabel = labels.get(labels.size() - 1);
+            lastLabel.deleteLastCharacter();
+            if (lastLabel.getText().equals("")) {
+                remove(lastLabel);
+            }
+        }
+    }
+
+    private void remove(SmartLabel lastLabel) {
+        labels.remove(lastLabel);
+        this.getChildren().remove(lastLabel);
+        lastLabel = null;
+    }
 }

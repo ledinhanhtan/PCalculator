@@ -30,4 +30,9 @@ class SmartLabel extends Label {
     }
 
     void concatOrReplace(String str) {    }
+
+    void deleteLastCharacter() {
+        strProperty.setValue(strProperty.getValue()
+                .substring(0, strProperty.getValue().length() - 1));
+    }
 }
