@@ -1,12 +1,13 @@
 package sample.model;
 
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.AnchorPane;
 
 public class Calculator {
-    private FlowPane flowPane;
+    private Expression expression;
 
-    public void setup(FlowPane flowPane) {
-        this.flowPane = flowPane;
+    public void setup(AnchorPane anchorPane) {
+        expression = new Expression();
+        anchorPane.getChildren().add(expression);
     }
 
     private boolean isDeclaredNumber;
@@ -15,7 +16,7 @@ public class Calculator {
     public void writeNumber(String number) {
         if (!isDeclaredNumber) {
             numberLabel = new NumberLabel();
-            flowPane.getChildren().add(numberLabel);
+            expression.add(numberLabel);
             isDeclaredNumber = true;
             isDeclaredOperator = false;
         }
@@ -28,11 +29,15 @@ public class Calculator {
     public void writeOperator(String operator) {
         if (!isDeclaredOperator) {
             operatorLabel = new OperatorLabel();
-            flowPane.getChildren().add((operatorLabel));
+            expression.add(operatorLabel);
             isDeclaredOperator = true;
             isDeclaredNumber = false;
         }
         operatorLabel.write(operator);
+    }
+
+    public void equal() {
+        System.out.println(expression.getExpression());
     }
 
     private void switchCondition() {

@@ -21,13 +21,13 @@ class SmartLabel extends Label {
         this.textProperty().bind(strProperty);
     }
 
-    void write(String operator) {
+    void write(String str) {
         if (strProperty.getValue() == null) {
-            strProperty.setValue(operator);
+            strProperty.setValue(str);
         } else {
-            concatOrReplace(operator);
+            concatOrReplace(str);
         }
     }
 
-    void concatOrReplace(String operator) {    }
+    void concatOrReplace(String str) {    }
 }

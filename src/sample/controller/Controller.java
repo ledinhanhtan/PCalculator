@@ -11,20 +11,17 @@ import sample.model.Calculator;
 
 public class Controller {
     @FXML
-    Label expression;
-    @FXML
     Label result;
+
     @FXML
-    AnchorPane root;
-    @FXML
-    FlowPane flowPane;
+    AnchorPane anchorPane;
 
     private Calculator calculator;
 
     @FXML
     public void initialize() {
         calculator = new Calculator();
-        calculator.setup(flowPane);
+        calculator.setup(anchorPane);
     }
 
     @FXML
@@ -37,6 +34,11 @@ public class Controller {
     public void operator(ActionEvent e) {
         Button button = (Button) e.getSource();
         calculator.writeOperator(button.getText());
+    }
+
+    @FXML
+    public void equal() {
+        calculator.equal();
     }
 
 //    public void keyEventHandler(KeyEvent keyEvent) throws ScriptException {
