@@ -35,8 +35,6 @@ public class Calculator {
         operatorLabel.write(operator);
     }
 
-//    private void switchCondition() {
-//        isDeclaredOperator = isDeclaredNumber;
-//        isDeclaredNumber = !isDeclaredOperator;
-//    }
+    private void switchCondition() {
+    }
 }
