@@ -1,45 +1,62 @@
 package sample.model;
 
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 public class Calculator {
     private Expression expression;
+    private Label result;
 
-    public void setup(AnchorPane anchorPane) {
-        expression = new Expression();
-        anchorPane.getChildren().add(expression);
-    }
-
-    private boolean isDeclaredNumber;
+    private boolean switcher;
     private NumberLabel numberLabel;
-
-    public void writeNumber(String number) {
-        if (!isDeclaredNumber) {
-            numberLabel = new NumberLabel();
-            expression.add(numberLabel);
-            isDeclaredNumber = true;
-            isDeclaredOperator = false;
-        }
-        numberLabel.write(number);
-    }
-
-    private boolean isDeclaredOperator;
     private OperatorLabel operatorLabel;
 
+    private ScriptEngine engine;
+
+    public void setup(AnchorPane anchorPane, Label result) {
+        expression = new Expression();
+        anchorPane.getChildren().add(expression);
+
+        this.result = result;
+
+        ScriptEngineManager mgr = new ScriptEngineManager();
+        engine = mgr.getEngineByName("JavaScript");
+    }
+
+    public void writeNumber(String number) throws ScriptException {
+        if (!switcher) {
+            numberLabel = new NumberLabel();
+            expression.add(numberLabel);
+
+            switcher = true;
+        }
+        numberLabel.write(number);
+        equal();
+    }
+
     public void writeOperator(String operator) {
-        if (!isDeclaredOperator) {
+        if (switcher) {
             operatorLabel = new OperatorLabel();
             expression.add(operatorLabel);
-            isDeclaredOperator = true;
-            isDeclaredNumber = false;
+
+            switcher = false;
         }
-        operatorLabel.write(operator);
+        if (operatorLabel != null) { operatorLabel.write(operator); }
     }
 
-    public void equal() {
-        System.out.println(expression.getExpression());
+    public void equal() throws ScriptException {
+        result.setText("=" + evaluate(expression.getExpression()));
     }
 
-    private void switchCondition() {
+    private String evaluate(String expr) throws ScriptException {
+        return Integer.toString((int) engine.eval(expr));
+    }
+
+    public void delete() {
+
     }
 }

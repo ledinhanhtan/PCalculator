@@ -5,8 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
 import sample.model.Calculator;
+
+import javax.script.ScriptException;
 
 
 public class Controller {
@@ -21,11 +22,11 @@ public class Controller {
     @FXML
     public void initialize() {
         calculator = new Calculator();
-        calculator.setup(anchorPane);
+        calculator.setup(anchorPane, result);
     }
 
     @FXML
-    public void number(ActionEvent e) {
+    public void number(ActionEvent e) throws ScriptException {
         Button button = (Button) e.getSource();
         calculator.writeNumber(button.getText());
     }
@@ -37,8 +38,13 @@ public class Controller {
     }
 
     @FXML
-    public void equal() {
+    public void equal() throws ScriptException {
         calculator.equal();
+    }
+
+    @FXML
+    public void delete() {
+        calculator.delete();
     }
 
 //    public void keyEventHandler(KeyEvent keyEvent) throws ScriptException {

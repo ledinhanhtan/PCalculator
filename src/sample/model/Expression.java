@@ -18,7 +18,6 @@ class Expression extends FlowPane {
         this.setAlignment(Pos.BOTTOM_RIGHT);
         this.setPrefSize(240,150);
         this.setMaxSize(240,150);
-//        this.setPrefWrapLength(240);
         this.setPadding(new Insets(10));
     }
 
