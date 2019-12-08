@@ -10,6 +10,7 @@ import java.util.ArrayList;
 class Expression extends FlowPane {
     private ArrayList<SmartLabel> labels;
     private SimpleBooleanProperty conditionProperty;
+    private final String[] operators = {"+", "-", "*", "/"};
 
     Expression() {
         format();
@@ -37,11 +38,30 @@ class Expression extends FlowPane {
     }
 
     String getExpression() {
-        StringBuilder expr = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         for (SmartLabel label : labels) {
-            expr.append(label.getText());
+            stringBuilder.append(label.getText());
         }
-        return expr.toString();
+        String expr = stringBuilder.toString();
+        if (isLastCharacterAOperator(expr)) {
+            expr = expr.substring(0, expr.length() - 1);
+        }
+        return expr;
+    }
+
+    private boolean isLastCharacterAOperator(String expr) {
+        boolean result = false;
+        for (String operator : operators) {
+            if (getLastCharacter(expr).equals(operator)) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+
+    private String getLastCharacter(String expr) {
+        return String.valueOf(expr.charAt(expr.length() - 1));
     }
 
     void delete() {

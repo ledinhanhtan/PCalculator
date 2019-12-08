@@ -7,14 +7,18 @@ class NumberLabel extends SmartLabel {
         if (!this.strProperty.getValue().equals("0")) {
             //concat
             if (this.strProperty.getValue().length() < 11) {
-                this.strProperty.setValue(this.strProperty.getValue() + number);
+                concat(number);
             }
         }
     }
 
     void writeDot() {
         if (!this.strProperty.getValue().contains(".")) {
-            this.strProperty.setValue(strProperty.getValue() + ".");
+            concat(".");
         }
+    }
+
+    private void concat(String str) {
+        this.strProperty.setValue(this.strProperty.getValue() + str);
     }
 }

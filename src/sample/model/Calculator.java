@@ -28,7 +28,7 @@ public class Calculator {
         engine = mgr.getEngineByName("JavaScript");
     }
 
-    public void writeNumber(String number) throws ScriptException {
+    public void writeNumber(String number) {
         if (!(expression.isEmpty() && number.equals("0"))) {
             if (!conditionProperty.getValue()) {
                 expression.add(new NumberLabel());
@@ -43,9 +43,8 @@ public class Calculator {
         try {
             NumberLabel numberLabel = (NumberLabel) expression.getLastLabel();
             numberLabel.writeDot();
-        } catch (ClassCastException exp) {
-            //todo auto add 0.
-            System.out.println("Last label is a operator");
+        } catch (ClassCastException | ArrayIndexOutOfBoundsException exp) {
+            writeNumber("0.");
         }
     }
 
@@ -56,21 +55,41 @@ public class Calculator {
         }
         try {
             expression.getLastLabel().write(operator);
-        } catch (Exception ignored) { }
+        } catch (ArrayIndexOutOfBoundsException ignored) {
+            System.out.println("First character can't not be a operator");
+        }
     }
 
-    public void equal() throws ScriptException {
+    public void equal() {
         if (!expression.isEmpty()) {
-            result.setText("=" + evaluate(expression.getExpression()));
+            try {
+                result.setText("=" + evaluate(expression.getExpression()));
+            } catch (ScriptException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     private String evaluate(String expr) throws ScriptException {
-        return Integer.toString((int) engine.eval(expr));
+        String result;
+        try {
+            result = Integer.toString((int) engine.eval(expr));
+        } catch (ClassCastException e) {
+            result = Double.toString((double) engine.eval(expr));
+        }
+        if (result.length() > 12) {
+            result = result.substring(0, 15);
+        }
+        return result;
     }
 
     public void delete() {
         expression.delete();
+        equal();
+
+        if (expression.isEmpty()) {
+            result.setText("0");
+        }
     }
 
     private void switchCondition() {
