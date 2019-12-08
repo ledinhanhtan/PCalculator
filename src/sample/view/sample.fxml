@@ -50,7 +50,7 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="60.0" text="AC">
+            <Button mnemonicParsing="false" onAction="#allClear" prefHeight="50.0" prefWidth="60.0" text="AC">
                <font>
                   <Font size="20.0" />
                </font>
@@ -120,7 +120,7 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="btn_comma" mnemonicParsing="false" prefHeight="50.0" prefWidth="60.0" text="." GridPane.columnIndex="2" GridPane.rowIndex="4">
+            <Button fx:id="btn_dot" mnemonicParsing="false" onAction="#dot" prefHeight="50.0" prefWidth="60.0" text="." GridPane.columnIndex="2" GridPane.rowIndex="4">
                <font>
                   <Font size="20.0" />
                </font>

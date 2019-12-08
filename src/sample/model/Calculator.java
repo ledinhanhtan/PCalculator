@@ -1,5 +1,6 @@
 package sample.model;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
@@ -11,14 +12,14 @@ public class Calculator {
     private Expression expression;
     private Label result;
 
-    private boolean switcher;
-    private NumberLabel numberLabel;
-    private OperatorLabel operatorLabel;
+    private SimpleBooleanProperty conditionProperty;
 
     private ScriptEngine engine;
 
     public void setup(AnchorPane anchorPane, Label result) {
+        conditionProperty = new SimpleBooleanProperty(false);
         expression = new Expression();
+        expression.setConditionProperty(conditionProperty);
         anchorPane.getChildren().add(expression);
 
         this.result = result;
@@ -28,28 +29,40 @@ public class Calculator {
     }
 
     public void writeNumber(String number) throws ScriptException {
-        if (!switcher) {
-            numberLabel = new NumberLabel();
-            expression.add(numberLabel);
-
-            switcher = true;
+        if (!(expression.isEmpty() && number.equals("0"))) {
+            if (!conditionProperty.getValue()) {
+                expression.add(new NumberLabel());
+                switchCondition();
+            }
+            expression.getLastLabel().write(number);
+            equal();
         }
-        numberLabel.write(number);
-        equal();
+    }
+
+    public void writeDot() {
+        try {
+            NumberLabel numberLabel = (NumberLabel) expression.getLastLabel();
+            numberLabel.writeDot();
+        } catch (ClassCastException exp) {
+            //todo auto add 0.
+            System.out.println("Last label is a operator");
+        }
     }
 
     public void writeOperator(String operator) {
-        if (switcher) {
-            operatorLabel = new OperatorLabel();
-            expression.add(operatorLabel);
-
-            switcher = false;
+        if (conditionProperty.getValue()) {
+            expression.add(new OperatorLabel());
+            switchCondition();
         }
-        if (operatorLabel != null) { operatorLabel.write(operator); }
+        try {
+            expression.getLastLabel().write(operator);
+        } catch (Exception ignored) { }
     }
 
     public void equal() throws ScriptException {
-        result.setText("=" + evaluate(expression.getExpression()));
+        if (!expression.isEmpty()) {
+            result.setText("=" + evaluate(expression.getExpression()));
+        }
     }
 
     private String evaluate(String expr) throws ScriptException {
@@ -58,5 +71,15 @@ public class Calculator {
 
     public void delete() {
         expression.delete();
+    }
+
+    private void switchCondition() {
+        conditionProperty.setValue(!conditionProperty.getValue());
+    }
+
+    public void allClear() {
+        expression.clear();
+        result.setText("0");
+        conditionProperty.setValue(false);
     }
 }

@@ -12,10 +12,9 @@ import javax.script.ScriptException;
 
 public class Controller {
     @FXML
-    Label result;
-
-    @FXML
     AnchorPane anchorPane;
+    @FXML
+    Label result;
 
     private Calculator calculator;
 
@@ -32,6 +31,11 @@ public class Controller {
     }
 
     @FXML
+    public void dot() {
+        calculator.writeDot();
+    }
+
+    @FXML
     public void operator(ActionEvent e) {
         Button button = (Button) e.getSource();
         calculator.writeOperator(button.getText());
@@ -45,6 +49,11 @@ public class Controller {
     @FXML
     public void delete() {
         calculator.delete();
+    }
+
+    @FXML
+    public void allClear() {
+        calculator.allClear();
     }
 
 //    public void keyEventHandler(KeyEvent keyEvent) throws ScriptException {
