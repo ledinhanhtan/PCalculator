@@ -34,6 +34,10 @@ public class Calculator {
 
         screen = new Screen();
         screen.setup(expression, result);
+
+        try {
+            System.out.println(engine.eval("6.002+8"));
+        } catch (Exception ignore) {}
     }
 
     public void writeNumber(String number) {
@@ -56,6 +60,11 @@ public class Calculator {
 
 
     public void writeDot() {
+        if (calculated) {
+            System.out.println(getPreviousExpressionAndResult());
+            allClear();
+        }
+
         try {
             NumberLabel numberLabel = (NumberLabel) expression.getLastLabel();
             numberLabel.writeDot();
@@ -82,7 +91,7 @@ public class Calculator {
         try {
             expression.getLastLabel().write(operator);
         } catch (ArrayIndexOutOfBoundsException ignored) {
-            System.out.println("First character can't not be a operator");
+            System.out.println("First character can't not be an operator");
         }
     }
 
@@ -97,15 +106,21 @@ public class Calculator {
     }
 
     public void percent() {
+        if (calculated) {
+            String ans = result.getText().replaceAll("=", "");
+            allClear();
+            writeNumber(ans);
+        }
         try {
             NumberLabel lbl = (NumberLabel) expression.getLastLabel();
             double number = Double.parseDouble(lbl.getText());
             lbl.setText(Double.toString(number/100));
         } catch (ClassCastException clExp) {
-            System.out.println("Last label is a");
+            System.out.println("Last label is a operator");
         } catch (ArrayIndexOutOfBoundsException arExp) {
             System.out.println("Empty");
         }
+        calculate();
     }
 
     public void equal() {
@@ -114,8 +129,10 @@ public class Calculator {
     }
 
     private String formatNumberForResult(String result) {
-        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
-        result = numberFormat.format(Double.parseDouble(result));
+        if (result.contains("99999999")) {
+            NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+            result = numberFormat.format(Double.parseDouble(result));
+        }
         return result;
     }
 

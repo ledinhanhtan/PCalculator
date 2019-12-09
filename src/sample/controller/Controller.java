@@ -30,9 +30,7 @@ public class Controller {
     }
 
     @FXML
-    public void dot() {
-        calculator.writeDot();
-    }
+    public void dot() { calculator.writeDot(); }
 
     @FXML
     public void operator(ActionEvent e) {
@@ -41,24 +39,16 @@ public class Controller {
     }
 
     @FXML
-    public void percent() {
-        calculator.percent();
-    }
+    public void percent() { calculator.percent(); }
 
     @FXML
-    public void equal() {
-        calculator.equal();
-    }
+    public void equal() { calculator.equal(); }
 
     @FXML
-    public void delete() {
-        calculator.delete();
-    }
+    public void delete() { calculator.delete(); }
 
     @FXML
-    public void allClear() {
-        calculator.allClear();
-    }
+    public void allClear() { calculator.allClear(); }
 
     public void keyEventHandler(KeyEvent keyEvent) {
         String key = keyEvent.getText();
