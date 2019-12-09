@@ -28,7 +28,11 @@ class NumberLabel extends SmartLabel {
             if (newValue.contains(",")) {
                 newValue = newValue.replaceAll(",", "");
             }
-            this.setText(numberFormat.format(Integer.parseInt(newValue)));
+            try {
+                this.setText(numberFormat.format(Integer.parseInt(newValue)));
+            } catch (NumberFormatException e) {
+                System.out.println("Trying to cast (int) to (double). Fix later");
+            }
         } else if (newValue.length() == 3){
             this.setText(this.getText().replaceAll(",", ""));
         }

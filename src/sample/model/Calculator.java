@@ -7,6 +7,8 @@ import javafx.scene.layout.AnchorPane;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class Calculator {
     private Expression expression;
@@ -52,6 +54,8 @@ public class Calculator {
             numberLabel.writeDot();
         } catch (ClassCastException | ArrayIndexOutOfBoundsException exp) {
             writeNumber("0.");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -70,7 +74,7 @@ public class Calculator {
     public void equal() {
         if (!expression.isEmpty()) {
             try {
-                result.setText("=" + evaluate(expression.getExpression()));
+                result.setText("=" + formatNumberForResult(evaluate(expression.getExpression())));
             } catch (ScriptException e) {
                 e.printStackTrace();
             }
@@ -87,6 +91,12 @@ public class Calculator {
         if (result.length() > 12) {
             result = result.substring(0, 15);
         }
+        return result;
+    }
+
+    private String formatNumberForResult(String result) {
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+        result = numberFormat.format(Double.parseDouble(result));
         return result;
     }
 
