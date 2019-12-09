@@ -42,9 +42,15 @@ class Expression extends FlowPane {
         for (SmartLabel label : labels) {
             stringBuilder.append(label.getText());
         }
-        String expr = stringBuilder.toString();
+        return validExpression(stringBuilder.toString());
+    }
+
+    private String validExpression(String expr) {
         if (isLastCharacterAOperator(expr)) {
             expr = expr.substring(0, expr.length() - 1);
+        }
+        if (expr.contains(",")) {
+            expr = expr.replaceAll(",", "");
         }
         return expr;
     }
