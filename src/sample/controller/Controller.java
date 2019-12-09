@@ -41,6 +41,11 @@ public class Controller {
     }
 
     @FXML
+    public void percent() {
+        calculator.percent();
+    }
+
+    @FXML
     public void equal() {
         calculator.equal();
     }

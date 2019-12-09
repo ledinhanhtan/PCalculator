@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 
@@ -99,5 +100,11 @@ class Expression extends FlowPane {
     void clear() {
         this.getChildren().clear();
         labels.clear();
+    }
+
+    void zoom(int size) {
+        for (SmartLabel lbl : labels) {
+            lbl.setFont(new Font("System", size));
+        }
     }
 }
