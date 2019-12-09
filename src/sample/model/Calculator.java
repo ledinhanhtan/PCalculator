@@ -23,9 +23,16 @@ public class Calculator {
         anchorPane.getChildren().add(expression);
 
         this.result = result;
+        result.textProperty().addListener((observable, oldValue, newValue) -> specialCase(newValue));
 
         ScriptEngineManager mgr = new ScriptEngineManager();
         engine = mgr.getEngineByName("JavaScript");
+    }
+
+    private void specialCase(String newValue) {
+        if (newValue.matches("=Infinity|=-Infinity")) {
+            result.setText("=Can't divide by zero");
+        }
     }
 
     public void writeNumber(String number) {
