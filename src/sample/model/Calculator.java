@@ -34,10 +34,6 @@ public class Calculator {
 
         screen = new Screen();
         screen.setup(expression, result);
-
-        try {
-            System.out.println(engine.eval("6.002+8"));
-        } catch (Exception ignore) {}
     }
 
     public void writeNumber(String number) {
