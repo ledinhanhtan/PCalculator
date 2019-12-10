@@ -9,7 +9,7 @@ class SmartLabel extends Label {
         format();
     }
 
-    void setup() {}
+    void setup() {    }
 
     private void format() {
         this.setFont(new Font("System", 35));

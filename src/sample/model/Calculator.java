@@ -92,11 +92,24 @@ public class Calculator {
     private void calculate() {
         if (!expression.isEmpty()) {
             try {
-                result.setText("=" + formatNumberForResult(evaluate(expression.getExpression())));
+                result.setText("=" + formatNumberForResult(evaluate(validExpression(
+                        expression.getExpression()))));
             } catch (ScriptException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    private String validExpression(String expr) {
+        if (expr.contains("x")) {
+            expr = expr.replaceAll("x", "*");
+        }
+
+        if (expr.contains("÷")) {
+            expr = expr.replaceAll("÷", "/");
+        }
+
+        return expr;
     }
 
     public void percent() {
@@ -108,7 +121,7 @@ public class Calculator {
         }
         try {
             NumberLabel lbl = (NumberLabel) expression.getLastLabel();
-            double number = Double.parseDouble(lbl.getText());
+            double number = Double.parseDouble(lbl.getText().replaceAll(",", ""));
             lbl.setText(Double.toString(number/100));
         } catch (ClassCastException clExp) {
             System.out.println("Last label is a operator");
@@ -119,8 +132,10 @@ public class Calculator {
     }
 
     public void equal() {
-        screen.zoomZoom();
-        calculated = true;
+        if (!expression.isEmpty()) {
+            screen.zoomZoom();
+            calculated = true;
+        }
     }
 
     private String formatNumberForResult(String result) {
@@ -135,6 +150,7 @@ public class Calculator {
         } catch (ClassCastException e) {
             result = Double.toString((double) engine.eval(expr));
         }
+        //Todo: substring overkill
         if (result.length() > 12) {
             result = result.substring(0, 15);
         }
@@ -142,6 +158,10 @@ public class Calculator {
     }
 
     public void delete() {
+        if (calculated) {
+            calculated = false;
+        }
+
         expression.delete();
         calculate();
 

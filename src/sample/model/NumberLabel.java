@@ -18,7 +18,7 @@ class NumberLabel extends SmartLabel {
         if (!this.getText().equals("0")) {
             //concat
             if (this.getText().length() < 11) {
-                concat(number);
+                this.setText(this.getText() + number);
             }
         }
     }
@@ -30,9 +30,7 @@ class NumberLabel extends SmartLabel {
             }
             try {
                 this.setText(numberFormat.format(Integer.parseInt(newValue)));
-            } catch (NumberFormatException e) {
-                System.out.println("Trying to cast (int) to (double). Fix later");
-            }
+            } catch (NumberFormatException ignored) { }
         } else if (newValue.length() == 3){
             this.setText(this.getText().replaceAll(",", ""));
         }
@@ -40,11 +38,7 @@ class NumberLabel extends SmartLabel {
 
     void writeDot() {
         if (!this.getText().contains(".")) {
-            concat(".");
+            this.setText(this.getText() + ".");
         }
-    }
-
-    private void concat(String str) {
-        this.setText(this.getText() + str);
     }
 }

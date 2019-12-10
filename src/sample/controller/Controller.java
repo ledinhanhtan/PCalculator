@@ -55,10 +55,12 @@ public class Controller {
 
         if (key.matches("[0-9]")) {
             calculator.writeNumber(key);
-        } else if (key.matches("[+\\-*/]")) {
+        } else if (key.matches("[+\\-]")) {
             calculator.writeOperator(key);
-        } else if (key.equals(".")) {
-            calculator.writeDot();
+        } else if (key.equals("*")) {
+            calculator.writeOperator("x");
+        }else if (key.equals("/")) {
+            calculator.writeOperator("÷");
         } else if (keyEvent.getCode().equals(KeyCode.BACK_SPACE)) {
             calculator.delete();
         } else if (keyEvent.getCode().equals(KeyCode.ESCAPE)) {
