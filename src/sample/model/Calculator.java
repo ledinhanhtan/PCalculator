@@ -11,7 +11,6 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class Calculator {
-    private ScrollPane scrollPane;
     private Expression expression;
     private Label result;
     private Screen screen;
@@ -28,7 +27,6 @@ public class Calculator {
 
         expression = new Expression();
         expression.setConditionProperty(conditionProperty);
-        this.scrollPane = scrollPane;
         scrollPane.setContent(expression);
         expression.heightProperty().addListener(observable-> scrollPane.setVvalue(1));
 
