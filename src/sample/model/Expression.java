@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 class Expression extends FlowPane {
     private ArrayList<SmartLabel> labels;
+    private ArrayList<EvaluatedExpression> blankLabelList;
     private SimpleBooleanProperty conditionProperty;
     private final String[] operators = {"+", "-", "*", "/"};
 
@@ -27,7 +28,11 @@ class Expression extends FlowPane {
         addBlankLabel();
     }
 
-    private ArrayList<EvaluatedExpression> blankLabelList;
+    private void format() {
+        this.setAlignment(Pos.BOTTOM_RIGHT);
+        this.setMaxWidth(230);
+    }
+
     private void addBlankLabel() {
         blankLabelList = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
@@ -35,11 +40,6 @@ class Expression extends FlowPane {
             this.getChildren().add(blankLabel);
             blankLabelList.add(blankLabel);
         }
-    }
-
-    private void format() {
-        this.setAlignment(Pos.BOTTOM_RIGHT);
-        this.setMaxWidth(230);
     }
 
     void setConditionProperty(SimpleBooleanProperty conditionProperty) {
@@ -123,6 +123,7 @@ class Expression extends FlowPane {
 
     void allClear() {
         this.getChildren().clear();
+        addBlankLabel();
         labels.clear();
     }
 
