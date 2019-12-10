@@ -2,7 +2,7 @@ package sample.model;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.ScrollPane;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -11,6 +11,7 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class Calculator {
+    private ScrollPane scrollPane;
     private Expression expression;
     private Label result;
     private Screen screen;
@@ -20,14 +21,16 @@ public class Calculator {
 
     private ScriptEngine engine;
 
-    public void setup(AnchorPane anchorPane, Label result) {
+    public void setup(ScrollPane scrollPane, Label result) {
         conditionProperty = new SimpleBooleanProperty(false);
         ScriptEngineManager mgr = new ScriptEngineManager();
         engine = mgr.getEngineByName("JavaScript");
 
         expression = new Expression();
         expression.setConditionProperty(conditionProperty);
-        anchorPane.getChildren().add(expression);
+        this.scrollPane = scrollPane;
+        scrollPane.setContent(expression);
+        expression.heightProperty().addListener(observable-> scrollPane.setVvalue(1));
 
         this.result = result;
         result.textProperty().addListener((observable, oldValue, newValue) -> specialCase(newValue));
@@ -41,7 +44,6 @@ public class Calculator {
         //a fresh calculator
         if (calculated) {
             expression.addLabel(getPreviousExpressionAndResult());
-            System.out.println(getPreviousExpressionAndResult());
             clear();
         }
 
@@ -57,7 +59,6 @@ public class Calculator {
 
     public void writeDot() {
         if (calculated) {
-            System.out.println(getPreviousExpressionAndResult());
             expression.addLabel(getPreviousExpressionAndResult());
             clear();
         }
@@ -76,7 +77,6 @@ public class Calculator {
         //Ans, write a new expression begin with previous result (ans)
         if (calculated) {
             expression.addLabel(getPreviousExpressionAndResult());
-            System.out.println(getPreviousExpressionAndResult());
             String ans = result.getText().replaceAll("=", "");
             clear();
             writeNumber(ans);

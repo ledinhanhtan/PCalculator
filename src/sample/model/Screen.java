@@ -13,7 +13,7 @@ public class Screen {
     }
 
     public void zoomZoom() {
-        expression.zoom(22);
+        expression.zoom(25);
         result.setFont(new Font("System", 35));
     }
 

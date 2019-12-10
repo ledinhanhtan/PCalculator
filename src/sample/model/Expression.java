@@ -1,7 +1,6 @@
 package sample.model;
 
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -22,11 +21,8 @@ class Expression extends FlowPane {
 
     private void format() {
         this.setAlignment(Pos.BOTTOM_RIGHT);
-        this.setMaxWidth(240);
-        this.setPrefWrapLength(240);
+        this.setMaxWidth(230);
         AnchorPane.setBottomAnchor(this, 0.0);
-        AnchorPane.setRightAnchor(this, 0.0);
-        this.setPadding(new Insets(10));
     }
 
     void setConditionProperty(SimpleBooleanProperty conditionProperty) {
