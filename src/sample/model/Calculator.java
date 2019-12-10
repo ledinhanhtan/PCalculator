@@ -100,6 +100,11 @@ public class Calculator {
         }
     }
 
+    private String formatNumberForResult(String result) {
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+        return numberFormat.format(Double.parseDouble(result));
+    }
+
     private String validExpression(String expr) {
         if (expr.contains("x")) {
             expr = expr.replaceAll("x", "*");
@@ -136,11 +141,6 @@ public class Calculator {
             screen.zoomZoom();
             calculated = true;
         }
-    }
-
-    private String formatNumberForResult(String result) {
-        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
-        return numberFormat.format(Double.parseDouble(result));
     }
 
     private String evaluate(String expr) throws ScriptException {

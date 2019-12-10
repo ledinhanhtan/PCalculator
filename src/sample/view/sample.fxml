@@ -108,7 +108,7 @@
                   <Font size="20.0" />
                </font>
                <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" opacity="0.58" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="20.0" fitWidth="20.0" opacity="0.69" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resource/icon/back.png" />
                      </image>

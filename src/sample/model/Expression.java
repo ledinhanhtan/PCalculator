@@ -137,8 +137,8 @@ class Expression extends FlowPane {
         this.getChildren().add(new EvaluatedExpression(evaluatedExpression));
 
         if (blankLabelList.size() > 0) {
-            this.getChildren().remove(blankLabelList.get(blankLabelList.size() - 1));
-            blankLabelList.remove(blankLabelList.size() - 1);
+            this.getChildren().remove(blankLabelList.get(0));
+            blankLabelList.remove(0);
         }
     }
 }
