@@ -16,7 +16,6 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 230, 440));
         primaryStage.setResizable(false);
         primaryStage.show();
-        System.out.println("Test");
     }
 
     public static void main(String[] args) {

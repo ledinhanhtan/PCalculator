@@ -3,6 +3,8 @@ package sample.model;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Font;
 
@@ -20,8 +22,10 @@ class Expression extends FlowPane {
 
     private void format() {
         this.setAlignment(Pos.BOTTOM_RIGHT);
-        this.setPrefSize(240,150);
-        this.setMaxSize(240,150);
+        this.setMaxWidth(240);
+        this.setPrefWrapLength(240);
+        AnchorPane.setBottomAnchor(this, 0.0);
+        AnchorPane.setRightAnchor(this, 0.0);
         this.setPadding(new Insets(10));
     }
 
@@ -98,6 +102,13 @@ class Expression extends FlowPane {
     }
 
     void clear() {
+        for (Label lbl : labels) {
+            this.getChildren().remove(lbl);
+        }
+        labels.clear();
+    }
+
+    void allClear() {
         this.getChildren().clear();
         labels.clear();
     }
@@ -106,5 +117,9 @@ class Expression extends FlowPane {
         for (SmartLabel lbl : labels) {
             lbl.setFont(new Font("System", size));
         }
+    }
+
+    void addLabel(String evaluatedExpression) {
+        this.getChildren().add(new EvaluatedExpression(evaluatedExpression));
     }
 }

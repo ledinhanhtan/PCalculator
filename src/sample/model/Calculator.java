@@ -40,8 +40,9 @@ public class Calculator {
         //After hit equal button, everything reset if user continue enter a number
         //a fresh calculator
         if (calculated) {
+            expression.addLabel(getPreviousExpressionAndResult());
             System.out.println(getPreviousExpressionAndResult());
-            allClear();
+            clear();
         }
 
         if (!(expression.isEmpty() && number.equals("0"))) {
@@ -54,11 +55,11 @@ public class Calculator {
         }
     }
 
-
     public void writeDot() {
         if (calculated) {
             System.out.println(getPreviousExpressionAndResult());
-            allClear();
+            expression.addLabel(getPreviousExpressionAndResult());
+            clear();
         }
 
         try {
@@ -74,9 +75,10 @@ public class Calculator {
     public void writeOperator(String operator) {
         //Ans, write a new expression begin with previous result (ans)
         if (calculated) {
+            expression.addLabel(getPreviousExpressionAndResult());
             System.out.println(getPreviousExpressionAndResult());
             String ans = result.getText().replaceAll("=", "");
-            allClear();
+            clear();
             writeNumber(ans);
         }
 
@@ -104,7 +106,7 @@ public class Calculator {
     public void percent() {
         if (calculated) {
             String ans = result.getText().replaceAll("=", "");
-            allClear();
+            clear();
             writeNumber(ans);
         }
         try {
@@ -125,11 +127,8 @@ public class Calculator {
     }
 
     private String formatNumberForResult(String result) {
-        if (result.contains("99999999")) {
-            NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
-            result = numberFormat.format(Double.parseDouble(result));
-        }
-        return result;
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+        return numberFormat.format(Double.parseDouble(result));
     }
 
     private String evaluate(String expr) throws ScriptException {
@@ -170,8 +169,17 @@ public class Calculator {
         }
     }
 
-    public void allClear() {
+    private void clear() {
         expression.clear();
+        result.setText("0");
+        conditionProperty.setValue(false);
+        calculated = false;
+
+        screen.zoomZoomReverse();
+    }
+
+    public void allClear() {
+        expression.allClear();
         result.setText("0");
         conditionProperty.setValue(false);
         calculated = false;
