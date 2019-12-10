@@ -25,10 +25,8 @@ public class Calculator {
         ScriptEngineManager mgr = new ScriptEngineManager();
         engine = mgr.getEngineByName("JavaScript");
 
-        expression = new Expression();
+        expression = new Expression(scrollPane);
         expression.setConditionProperty(conditionProperty);
-        scrollPane.setContent(expression);
-        expression.heightProperty().addListener(observable-> scrollPane.setVvalue(1));
 
         this.result = result;
         result.textProperty().addListener((observable, oldValue, newValue) -> specialCase(newValue));
@@ -104,6 +102,7 @@ public class Calculator {
     public void percent() {
         if (calculated) {
             String ans = result.getText().replaceAll("=", "");
+            expression.addLabel(getPreviousExpressionAndResult());
             clear();
             writeNumber(ans);
         }

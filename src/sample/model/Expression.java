@@ -3,7 +3,7 @@ package sample.model;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Font;
 
@@ -14,15 +14,32 @@ class Expression extends FlowPane {
     private SimpleBooleanProperty conditionProperty;
     private final String[] operators = {"+", "-", "*", "/"};
 
-    Expression() {
+    Expression(ScrollPane parent) {
         format();
         labels = new ArrayList<>();
+
+        parent.setContent(this);
+        this.heightProperty().addListener(observable-> {
+            parent.setVvalue(1);
+            parent.setHvalue(1);
+        });
+
+        addBlankLabel();
+    }
+
+    private ArrayList<EvaluatedExpression> blankLabelList;
+    private void addBlankLabel() {
+        blankLabelList = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            EvaluatedExpression blankLabel = new EvaluatedExpression("");
+            this.getChildren().add(blankLabel);
+            blankLabelList.add(blankLabel);
+        }
     }
 
     private void format() {
         this.setAlignment(Pos.BOTTOM_RIGHT);
         this.setMaxWidth(230);
-        AnchorPane.setBottomAnchor(this, 0.0);
     }
 
     void setConditionProperty(SimpleBooleanProperty conditionProperty) {
@@ -117,5 +134,10 @@ class Expression extends FlowPane {
 
     void addLabel(String evaluatedExpression) {
         this.getChildren().add(new EvaluatedExpression(evaluatedExpression));
+
+        if (blankLabelList.size() > 0) {
+            this.getChildren().remove(blankLabelList.get(blankLabelList.size() - 1));
+            blankLabelList.remove(blankLabelList.size() - 1);
+        }
     }
 }
