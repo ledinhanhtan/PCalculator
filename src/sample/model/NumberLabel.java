@@ -9,9 +9,7 @@ class NumberLabel extends SmartLabel {
     @Override
     void setup() {
         numberFormat = NumberFormat.getNumberInstance(Locale.US);
-        this.textProperty().addListener((observable, oldValue, newValue) -> {
-            autoComma(newValue);
-        });
+        this.textProperty().addListener((observable, oldValue, newValue) -> autoComma(newValue));
     }
 
     @Override

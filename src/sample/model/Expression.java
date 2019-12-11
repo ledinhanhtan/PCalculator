@@ -182,8 +182,8 @@ class Expression extends FlowPane {
         this.getChildren().clear();
         addBlankLabel();
         labels.clear();
-        expressionProperty.setValue("");
         condition = false;
+        expressionProperty.setValue("");
     }
 
     void zoom(int size) {
