@@ -23,7 +23,7 @@ class Expression extends FlowPane {
 
     private void format() {
         this.setAlignment(Pos.BOTTOM_RIGHT);
-        this.setMaxWidth(230);
+        this.setMaxWidth(250);
     }
 
     void setup(ScrollPane parent) {

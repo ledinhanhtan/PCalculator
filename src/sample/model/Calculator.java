@@ -66,22 +66,6 @@ public class Calculator {
         expression.writeOperator(operator);
     }
 
-    private void calculate() {
-        if (!expression.isEmpty()) {
-            try {
-                result.setText("=" + formatNumberForResult(evaluate(
-                        expression.getExpression())));
-            } catch (ScriptException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private String formatNumberForResult(String result) {
-        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
-        return numberFormat.format(Double.parseDouble(result));
-    }
-
     public void percent() {
         if (calculated) {
             String ans = result.getText().replaceAll("=", "");
@@ -91,27 +75,6 @@ public class Calculator {
         }
         expression.percent();
         calculate();
-    }
-
-    public void equal() {
-        if (!expression.isEmpty()) {
-            screen.zoomZoom();
-            calculated = true;
-        }
-    }
-
-    private String evaluate(String expr) throws ScriptException {
-        String result;
-        try {
-            result = Integer.toString((int) engine.eval(expr));
-        } catch (ClassCastException e) {
-            result = Double.toString((double) engine.eval(expr));
-        }
-        //Todo: substring overkill
-//        if (result.length() > 12) {
-//            result = result.substring(0, 15);
-//        }
-        return result;
     }
 
     public void delete() {
@@ -125,6 +88,47 @@ public class Calculator {
         expression.delete();
         calculate();
         screen.zoomZoomReverse();
+    }
+
+    private void calculate() {
+        if (!expression.isEmpty()) {
+            try {
+                result.setText("=" + subString(formatNumberForResult(evaluate(
+                        expression.getExpression()))));
+            } catch (ScriptException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private String evaluate(String expr) throws ScriptException {
+        String result;
+        try {
+            result = Integer.toString((int) engine.eval(expr));
+        } catch (ClassCastException e) {
+            result = Double.toString((double) engine.eval(expr));
+        }
+        return result;
+    }
+
+    private String formatNumberForResult(String result) {
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+        return numberFormat.format(Double.parseDouble(result));
+    }
+
+    //Todo
+    private String subString(String str) {
+        if (str.length() > 12) {
+            str = str.substring(0, 12);
+        }
+        return str;
+    }
+
+    public void equal() {
+        if (!expression.isEmpty()) {
+            screen.zoomZoom();
+            calculated = true;
+        }
     }
 
     private String getPreviousExpressionAndResult() {

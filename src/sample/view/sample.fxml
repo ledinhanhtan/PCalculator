@@ -13,12 +13,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyEventHandler" prefHeight="450.0" prefWidth="240.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.Controller">
+<VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyEventHandler" prefHeight="450.0" prefWidth="260.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.Controller">
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="240.0">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="260.0">
          <children>
             <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" pannable="true" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER" vvalue="1.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
-            <Label fx:id="result" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="240.0" text="0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0">
+            <Label fx:id="result" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="260.0" text="0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0">
                <padding>
                   <Insets right="10.0" />
                </padding>
@@ -28,7 +28,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="240.0">
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="260.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -43,67 +43,67 @@
             <RowConstraints minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" onAction="#number" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="1" GridPane.rowIndex="3">
+            <Button mnemonicParsing="false" onAction="#number" prefHeight="50.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="1" GridPane.rowIndex="3">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#number" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="0" GridPane.columnSpan="2" GridPane.rowIndex="4">
+            <Button mnemonicParsing="false" onAction="#number" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="0" GridPane.columnSpan="2" GridPane.rowIndex="4">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button layoutX="10.0" layoutY="160.0" mnemonicParsing="false" onAction="#number" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="4" GridPane.rowIndex="2">
+            <Button layoutX="10.0" layoutY="160.0" mnemonicParsing="false" onAction="#number" prefHeight="50.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="4" GridPane.rowIndex="2">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button layoutX="10.0" layoutY="160.0" mnemonicParsing="false" onAction="#number" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="7" GridPane.rowIndex="1">
+            <Button layoutX="10.0" layoutY="160.0" mnemonicParsing="false" onAction="#number" prefHeight="50.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="7" GridPane.rowIndex="1">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button layoutX="10.0" layoutY="160.0" mnemonicParsing="false" onAction="#number" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="2" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Button layoutX="10.0" layoutY="160.0" mnemonicParsing="false" onAction="#number" prefHeight="50.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="2" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button layoutX="10.0" layoutY="160.0" mnemonicParsing="false" onAction="#number" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="5" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Button layoutX="10.0" layoutY="160.0" mnemonicParsing="false" onAction="#number" prefHeight="50.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="5" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button layoutX="10.0" layoutY="110.0" mnemonicParsing="false" onAction="#number" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="8" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button layoutX="10.0" layoutY="110.0" mnemonicParsing="false" onAction="#number" prefHeight="50.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="8" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button layoutX="70.0" layoutY="60.0" mnemonicParsing="false" onAction="#number" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="9" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Button layoutX="70.0" layoutY="60.0" mnemonicParsing="false" onAction="#number" prefHeight="50.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="9" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button layoutX="130.0" layoutY="60.0" mnemonicParsing="false" onAction="#number" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="6" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <Button layoutX="130.0" layoutY="60.0" mnemonicParsing="false" onAction="#number" prefHeight="50.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="6" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button layoutX="70.0" layoutY="60.0" mnemonicParsing="false" onAction="#number" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="3" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <Button layoutX="70.0" layoutY="60.0" mnemonicParsing="false" onAction="#number" prefHeight="50.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="3" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button layoutX="130.0" layoutY="160.0" mnemonicParsing="false" onAction="#dot" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="." GridPane.columnIndex="2" GridPane.rowIndex="4">
+            <Button layoutX="130.0" layoutY="160.0" mnemonicParsing="false" onAction="#dot" prefHeight="50.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="." GridPane.columnIndex="2" GridPane.rowIndex="4">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button layoutX="10.0" layoutY="60.0" mnemonicParsing="false" onAction="#allClear" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0.2 0 0.2 0.2; -fx-text-fill: #FD8C3B;" text="AC">
+            <Button layoutX="10.0" layoutY="60.0" mnemonicParsing="false" onAction="#allClear" prefHeight="50.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0.2 0 0.2 0.2; -fx-text-fill: #FD8C3B;" text="AC">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#delete" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0.2 0 0.2 0.2;" GridPane.columnIndex="1">
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#delete" prefHeight="50.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0.2 0 0.2 0.2;" GridPane.columnIndex="1">
                <font>
                   <Font size="20.0" />
                </font>
@@ -115,32 +115,32 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="70.0" layoutY="10.0" mnemonicParsing="false" onAction="#percent" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0.2 0 0.2 0.2;" text="\%" GridPane.columnIndex="2">
+            <Button layoutX="70.0" layoutY="10.0" mnemonicParsing="false" onAction="#percent" prefHeight="50.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0.2 0 0.2 0.2;" text="\%" GridPane.columnIndex="2">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button layoutX="70.0" layoutY="10.0" mnemonicParsing="false" onAction="#operator" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0.2 0 0.2 0.2;" text="÷" GridPane.columnIndex="3">
+            <Button layoutX="70.0" layoutY="10.0" mnemonicParsing="false" onAction="#operator" prefHeight="50.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0.2 0 0.2 0.2;" text="÷" GridPane.columnIndex="3">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button layoutX="130.0" layoutY="60.0" mnemonicParsing="false" onAction="#operator" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="x" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <Button layoutX="130.0" layoutY="60.0" mnemonicParsing="false" onAction="#operator" prefHeight="50.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="x" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button layoutX="130.0" layoutY="110.0" mnemonicParsing="false" onAction="#operator" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="-" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <Button layoutX="130.0" layoutY="110.0" mnemonicParsing="false" onAction="#operator" prefHeight="50.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="-" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button layoutX="130.0" layoutY="110.0" mnemonicParsing="false" onAction="#operator" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="+" GridPane.columnIndex="3" GridPane.rowIndex="3">
+            <Button layoutX="130.0" layoutY="110.0" mnemonicParsing="false" onAction="#operator" prefHeight="50.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="+" GridPane.columnIndex="3" GridPane.rowIndex="3">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button layoutX="130.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#equal" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 0; -fx-background-color: #FD8C3B; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2; -fx-text-fill: #FFFFFF;" text="=" GridPane.columnIndex="3" GridPane.rowIndex="4">
+            <Button layoutX="130.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#equal" prefHeight="50.0" prefWidth="65.0" style="-fx-background-radius: 0; -fx-background-color: #FD8C3B; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2; -fx-text-fill: #FFFFFF;" text="=" GridPane.columnIndex="3" GridPane.rowIndex="4">
                <font>
                   <Font size="20.0" />
                </font>
