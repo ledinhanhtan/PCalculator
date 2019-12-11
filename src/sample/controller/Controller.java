@@ -59,8 +59,10 @@ public class Controller {
             calculator.writeOperator(key);
         } else if (key.equals("*")) {
             calculator.writeOperator("x");
-        }else if (key.equals("/")) {
+        } else if (key.equals("/")) {
             calculator.writeOperator("÷");
+        } else if (key.equals(".")) {
+            calculator.writeDot();
         } else if (keyEvent.getCode().equals(KeyCode.BACK_SPACE)) {
             calculator.delete();
         } else if (keyEvent.getCode().equals(KeyCode.ESCAPE)) {

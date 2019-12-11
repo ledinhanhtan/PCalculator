@@ -1,6 +1,6 @@
 package sample.model;
 
-import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -10,14 +10,26 @@ import javafx.scene.text.Font;
 import java.util.ArrayList;
 
 class Expression extends FlowPane {
+    private final String[] operators = {"+", "-", "x", "÷"};
     private ArrayList<SmartLabel> labels;
     private ArrayList<EvaluatedExpression> blankLabelList;
-    private SimpleBooleanProperty conditionProperty;
-    private final String[] operators = {"+", "-", "*", "/"};
 
-    Expression(ScrollPane parent) {
+    private boolean condition;
+    private SimpleStringProperty expressionProperty;
+
+    Expression() {
         format();
+    }
+
+    private void format() {
+        this.setAlignment(Pos.BOTTOM_RIGHT);
+        this.setMaxWidth(230);
+    }
+
+    void setup(ScrollPane parent) {
         labels = new ArrayList<>();
+
+        expressionProperty = new SimpleStringProperty("");
 
         parent.setContent(this);
         this.heightProperty().addListener(observable-> {
@@ -26,11 +38,6 @@ class Expression extends FlowPane {
         });
 
         addBlankLabel();
-    }
-
-    private void format() {
-        this.setAlignment(Pos.BOTTOM_RIGHT);
-        this.setMaxWidth(230);
     }
 
     private void addBlankLabel() {
@@ -42,16 +49,70 @@ class Expression extends FlowPane {
         }
     }
 
-    void setConditionProperty(SimpleBooleanProperty conditionProperty) {
-        this.conditionProperty = conditionProperty;
+    void writeNumber(String number) {
+        if (!(labels.size() == 0) || !number.equals("0")) {
+            if (!condition) {
+                add(new NumberLabel());
+                switchCondition();
+            }
+            getLastLabel().write(number);
+            updateProperty();
+        }
     }
 
-    void add(SmartLabel label) {
+    void writeDot() {
+        try {
+            NumberLabel numberLabel = (NumberLabel) getLastLabel();
+            numberLabel.writeDot();
+        } catch (ClassCastException | ArrayIndexOutOfBoundsException exp) {
+            writeNumber("0.");
+        }
+        updateProperty();
+    }
+
+    void writeOperator(String operator) {
+        if (condition) {
+            add(new OperatorLabel());
+            switchCondition();
+        }
+        try {
+            getLastLabel().write(operator);
+            updateProperty();
+        } catch (ArrayIndexOutOfBoundsException ignored) {
+            System.out.println("First character can't not be an operator");
+        }
+    }
+
+    void percent() {
+        try {
+            NumberLabel lbl = (NumberLabel) getLastLabel();
+            double number = Double.parseDouble(lbl.getText().replaceAll(",", ""));
+            lbl.setText(Double.toString(number/100));
+            updateProperty();
+        } catch (ClassCastException clExp) {
+            System.out.println("Last label is a operator");
+        } catch (ArrayIndexOutOfBoundsException arExp) {
+            System.out.println("Empty");
+        }
+    }
+
+    void delete() {
+        if (labels.size() > 0) {
+            SmartLabel lastLabel = labels.get(labels.size() - 1);
+            lastLabel.deleteLastCharacter();
+            deleteProperty();
+            if (lastLabel.getText().equals("")) {
+                remove(lastLabel);
+            }
+        }
+    }
+
+    private void add(SmartLabel label) {
         this.getChildren().add(label);
         labels.add(label);
     }
 
-    SmartLabel getLastLabel() {
+    private SmartLabel getLastLabel() {
         return labels.get(labels.size() - 1);
     }
 
@@ -69,6 +130,12 @@ class Expression extends FlowPane {
         }
         if (expr.contains(",")) {
             expr = expr.replaceAll(",", "");
+        }
+        if (expr.contains("x")) {
+            expr = expr.replaceAll("x", "*");
+        }
+        if (expr.contains("÷")) {
+            expr = expr.replaceAll("÷", "/");
         }
         return expr;
     }
@@ -88,26 +155,15 @@ class Expression extends FlowPane {
         return String.valueOf(expr.charAt(expr.length() - 1));
     }
 
-    void delete() {
-        if (labels.size() > 0) {
-            SmartLabel lastLabel = labels.get(labels.size() - 1);
-            lastLabel.deleteLastCharacter();
-            if (lastLabel.getText().equals("")) {
-                remove(lastLabel);
-            }
-        }
-    }
-
     private void remove(SmartLabel lastLabel) {
         labels.remove(lastLabel);
         this.getChildren().remove(lastLabel);
-        lastLabel = null;
 
         switchCondition();
     }
 
     private void switchCondition() {
-        conditionProperty.setValue(!conditionProperty.getValue());
+        condition = !condition;
     }
 
     boolean isEmpty() {
@@ -119,12 +175,15 @@ class Expression extends FlowPane {
             this.getChildren().remove(lbl);
         }
         labels.clear();
+        condition = false;
     }
 
     void allClear() {
         this.getChildren().clear();
         addBlankLabel();
         labels.clear();
+        expressionProperty.setValue("");
+        condition = false;
     }
 
     void zoom(int size) {
@@ -133,12 +192,33 @@ class Expression extends FlowPane {
         }
     }
 
-    void addLabel(String evaluatedExpression) {
+    void addFinishedLabel(String evaluatedExpression) {
         this.getChildren().add(new EvaluatedExpression(evaluatedExpression));
 
         if (blankLabelList.size() > 0) {
             this.getChildren().remove(blankLabelList.get(0));
             blankLabelList.remove(0);
         }
+    }
+
+    SimpleStringProperty getExpressionProperty() {
+        return expressionProperty;
+    }
+
+    ArrayList<SmartLabel> getLabels() {
+        return labels;
+    }
+
+    private void updateProperty() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (SmartLabel label : labels) {
+            stringBuilder.append(label.getText());
+        }
+        expressionProperty.setValue(stringBuilder.toString());
+    }
+
+    private void deleteProperty() {
+        expressionProperty.setValue(expressionProperty.getValue().
+                substring(0, expressionProperty.getValue().length() - 1));
     }
 }

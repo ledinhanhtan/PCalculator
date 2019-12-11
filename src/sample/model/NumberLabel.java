@@ -9,7 +9,9 @@ class NumberLabel extends SmartLabel {
     @Override
     void setup() {
         numberFormat = NumberFormat.getNumberInstance(Locale.US);
-        this.textProperty().addListener((observable, oldValue, newValue) -> autoComma(newValue));
+        this.textProperty().addListener((observable, oldValue, newValue) -> {
+            autoComma(newValue);
+        });
     }
 
     @Override
@@ -17,9 +19,9 @@ class NumberLabel extends SmartLabel {
         //When user enter "0" in first index of a number, block user to add any number
         if (!this.getText().equals("0")) {
             //concat
-            if (this.getText().length() < 11) {
+//            if (this.getText().length() < 11) {
                 this.setText(this.getText() + number);
-            }
+//            }
         }
     }
 
@@ -31,7 +33,7 @@ class NumberLabel extends SmartLabel {
             try {
                 this.setText(numberFormat.format(Integer.parseInt(newValue)));
             } catch (NumberFormatException ignored) { }
-        } else if (newValue.length() == 3){
+        } else if (newValue.length() == 3) {
             this.setText(this.getText().replaceAll(",", ""));
         }
     }

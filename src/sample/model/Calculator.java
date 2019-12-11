@@ -1,6 +1,5 @@
 package sample.model;
 
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 
@@ -15,85 +14,63 @@ public class Calculator {
     private Label result;
     private Screen screen;
 
-    private SimpleBooleanProperty conditionProperty;
     private boolean calculated;
 
     private ScriptEngine engine;
 
     public void setup(ScrollPane scrollPane, Label result) {
-        conditionProperty = new SimpleBooleanProperty(false);
         ScriptEngineManager mgr = new ScriptEngineManager();
         engine = mgr.getEngineByName("JavaScript");
 
-        expression = new Expression(scrollPane);
-        expression.setConditionProperty(conditionProperty);
-
-        this.result = result;
-        result.textProperty().addListener((observable, oldValue, newValue) -> specialCase(newValue));
+        expression = new Expression();
+        expression.setup(scrollPane);
 
         screen = new Screen();
         screen.setup(expression, result);
+
+        this.result = result;
+        result.textProperty().addListener((observable, oldValue, newValue) -> specialCase(newValue));
     }
 
     public void writeNumber(String number) {
-        //After hit equal button, everything reset if user continue enter a number
-        //a fresh calculator
         if (calculated) {
-            expression.addLabel(getPreviousExpressionAndResult());
+            expression.addFinishedLabel(getPreviousExpressionAndResult());
             clear();
         }
 
-        if (!(expression.isEmpty() && number.equals("0"))) {
-            if (!conditionProperty.getValue()) {
-                expression.add(new NumberLabel());
-                switchCondition();
-            }
-            expression.getLastLabel().write(number);
-            calculate();
-        }
+        expression.writeNumber(number);
+        calculate();
     }
 
     public void writeDot() {
         if (calculated) {
-            expression.addLabel(getPreviousExpressionAndResult());
+            expression.addFinishedLabel(getPreviousExpressionAndResult());
+            String ans = result.getText().replaceAll("=", "");
             clear();
+            if (!ans.contains(".")) {
+               writeNumber(ans + ".");
+            }
         }
-
-        try {
-            NumberLabel numberLabel = (NumberLabel) expression.getLastLabel();
-            numberLabel.writeDot();
-        } catch (ClassCastException | ArrayIndexOutOfBoundsException exp) {
-            writeNumber("0.");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        expression.writeDot();
     }
 
     public void writeOperator(String operator) {
         //Ans, write a new expression begin with previous result (ans)
         if (calculated) {
-            expression.addLabel(getPreviousExpressionAndResult());
+            expression.addFinishedLabel(getPreviousExpressionAndResult());
             String ans = result.getText().replaceAll("=", "");
             clear();
             writeNumber(ans);
         }
 
-        if (conditionProperty.getValue()) {
-            expression.add(new OperatorLabel());
-            switchCondition();
-        }
-        try {
-            expression.getLastLabel().write(operator);
-        } catch (ArrayIndexOutOfBoundsException ignored) {
-            System.out.println("First character can't not be an operator");
-        }
+        expression.writeOperator(operator);
     }
 
     private void calculate() {
         if (!expression.isEmpty()) {
             try {
-                result.setText("=" + formatNumberForResult(evaluate(validExpression(
-                        expression.getExpression()))));
+                result.setText("=" + formatNumberForResult(evaluate(
+                        expression.getExpression())));
             } catch (ScriptException e) {
                 e.printStackTrace();
             }
@@ -105,34 +82,14 @@ public class Calculator {
         return numberFormat.format(Double.parseDouble(result));
     }
 
-    private String validExpression(String expr) {
-        if (expr.contains("x")) {
-            expr = expr.replaceAll("x", "*");
-        }
-
-        if (expr.contains("÷")) {
-            expr = expr.replaceAll("÷", "/");
-        }
-
-        return expr;
-    }
-
     public void percent() {
         if (calculated) {
             String ans = result.getText().replaceAll("=", "");
-            expression.addLabel(getPreviousExpressionAndResult());
+            expression.addFinishedLabel(getPreviousExpressionAndResult());
             clear();
             writeNumber(ans);
         }
-        try {
-            NumberLabel lbl = (NumberLabel) expression.getLastLabel();
-            double number = Double.parseDouble(lbl.getText().replaceAll(",", ""));
-            lbl.setText(Double.toString(number/100));
-        } catch (ClassCastException clExp) {
-            System.out.println("Last label is a operator");
-        } catch (ArrayIndexOutOfBoundsException arExp) {
-            System.out.println("Empty");
-        }
+        expression.percent();
         calculate();
     }
 
@@ -151,9 +108,9 @@ public class Calculator {
             result = Double.toString((double) engine.eval(expr));
         }
         //Todo: substring overkill
-        if (result.length() > 12) {
-            result = result.substring(0, 15);
-        }
+//        if (result.length() > 12) {
+//            result = result.substring(0, 15);
+//        }
         return result;
     }
 
@@ -161,19 +118,13 @@ public class Calculator {
         if (calculated) {
             calculated = false;
         }
-
-        expression.delete();
-        calculate();
-
         if (expression.isEmpty()) {
             result.setText("0");
         }
 
+        expression.delete();
+        calculate();
         screen.zoomZoomReverse();
-    }
-
-    private void switchCondition() {
-        conditionProperty.setValue(!conditionProperty.getValue());
     }
 
     private String getPreviousExpressionAndResult() {
@@ -181,26 +132,24 @@ public class Calculator {
     }
 
     private void specialCase(String newValue) {
-        if (newValue.matches("=Infinity|=-Infinity")) {
+        if (newValue.matches("=∞|=-∞")) {
             result.setText("=Can't divide by zero");
         }
     }
 
     private void clear() {
         expression.clear();
-        result.setText("0");
-        conditionProperty.setValue(false);
-        calculated = false;
-
-        screen.zoomZoomReverse();
+        cl();
     }
 
     public void allClear() {
         expression.allClear();
-        result.setText("0");
-        conditionProperty.setValue(false);
-        calculated = false;
+        cl();
+    }
 
+    private void cl() {
+        result.setText("0");
+        calculated = false;
         screen.zoomZoomReverse();
     }
 }
