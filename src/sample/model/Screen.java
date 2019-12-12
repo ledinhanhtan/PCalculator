@@ -16,12 +16,8 @@ public class Screen {
 
         this.labels = expression.getLabels();
 
-        expression.getExpressionProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.length() > 10) {
-                zoom(20);
-                zoom(30);
-            }
-        });
+        expression.getExpressionProperty().addListener((observable, oldValue, newValue) ->
+                reSize(newValue.replaceAll("[,.]", "").length()));
     }
 
     public void zoomZoom() {
@@ -39,7 +35,29 @@ public class Screen {
         result.setStyle("-fx-text-fill: #b3b3b3");
     }
 
-    private void zoom(int size) {
+    //Todo switch
+    private void reSize(int length) {
+        if (length == 8) {
+            setSize(35);
+        }
+        if (length == 9) {
+            setSize(33);
+        }
+        if (length == 10) {
+            setSize(31);
+        }
+        if (length == 11) {
+            setSize(29);
+        }
+        if (length == 12) {
+            setSize(27);
+        }
+        if (length == 13) {
+            setSize(25);
+        }
+    }
+
+    private void setSize(int size) {
         for (SmartLabel lbl : labels) {
             lbl.setFont(new Font("System", size));
         }

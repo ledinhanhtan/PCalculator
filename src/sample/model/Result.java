@@ -29,7 +29,9 @@ public class Result extends Label {
 
     private void setup() {
         numberFormat = NumberFormat.getNumberInstance(Locale.US);
-        this.textProperty().addListener((observable, oldValue, newValue) -> specialCase(newValue));
+        this.textProperty().addListener((observable, oldValue, newValue) -> {
+            specialCase(newValue);
+        });
     }
 
     void setResult(Number number) {

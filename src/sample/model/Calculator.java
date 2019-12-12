@@ -77,16 +77,15 @@ public class Calculator {
     }
 
     public void delete() {
-        if (calculated) {
-            calculated = false;
-        }
-        if (expression.isEmpty()) {
-            result.setText("0");
-        }
+        if (calculated) { calculated = false; }
 
         expression.delete();
+
+        if (expression.isEmpty()) { result.setText("0"); }
+
         calculate();
-        screen.zoomZoomReverse();
+
+        if (calculated) { screen.zoomZoomReverse(); }
     }
 
     private void calculate() {
