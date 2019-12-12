@@ -6,6 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Font;
+import sample.model.label.FinishedExpression;
+import sample.model.label.NumberLabel;
+import sample.model.label.OperatorLabel;
+import sample.model.label.SmartLabel;
 
 import java.util.ArrayList;
 

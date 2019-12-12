@@ -108,22 +108,22 @@
             </Button>
             <Button layoutX="70.0" layoutY="10.0" mnemonicParsing="false" onAction="#percent" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0.2 0 0.2 0.2;" text="\%" GridPane.columnIndex="2">
                <font>
-                  <Font size="20.0" />
+                  <Font size="18.0" />
                </font>
             </Button>
             <Button layoutX="70.0" layoutY="10.0" mnemonicParsing="false" onAction="#operator" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0.2 0 0.2 0.2;" text="÷" GridPane.columnIndex="3">
                <font>
-                  <Font size="20.0" />
+                  <Font size="22.0" />
                </font>
             </Button>
             <Button layoutX="130.0" layoutY="60.0" mnemonicParsing="false" onAction="#operator" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="x" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <font>
-                  <Font size="20.0" />
+                  <Font size="18.0" />
                </font>
             </Button>
             <Button layoutX="130.0" layoutY="110.0" mnemonicParsing="false" onAction="#operator" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="-" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <font>
-                  <Font size="20.0" />
+                  <Font size="22.0" />
                </font>
             </Button>
             <Button layoutX="130.0" layoutY="110.0" mnemonicParsing="false" onAction="#operator" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="+" GridPane.columnIndex="3" GridPane.rowIndex="3">
@@ -133,7 +133,7 @@
             </Button>
             <Button layoutX="130.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#equal" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 0; -fx-background-color: #FD8C3B; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2; -fx-text-fill: #FFFFFF;" text="=" GridPane.columnIndex="3" GridPane.rowIndex="4">
                <font>
-                  <Font size="20.0" />
+                  <Font size="22.0" />
                </font>
             </Button>
          </children>

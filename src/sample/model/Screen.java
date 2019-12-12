@@ -1,6 +1,7 @@
 package sample.model;
 
 import javafx.scene.text.Font;
+import sample.model.label.SmartLabel;
 
 import java.util.ArrayList;
 

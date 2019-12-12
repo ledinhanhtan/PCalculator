@@ -1,11 +1,11 @@
-package sample.model;
+package sample.model.label;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 
-class FinishedExpression extends Label {
-    FinishedExpression(String init) {
+public class FinishedExpression extends Label {
+    public FinishedExpression(String init) {
         super(init);
         format();
     }
