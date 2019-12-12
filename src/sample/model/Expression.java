@@ -192,6 +192,12 @@ class Expression extends FlowPane {
         }
     }
 
+    void setStyleForLabels(String hexColor) {
+        for (SmartLabel lbl : labels) {
+            lbl.setStyle("-fx-text-fill: " + hexColor);
+        }
+    }
+
     void addFinishedLabel(String evaluatedExpression) {
         this.getChildren().add(new EvaluatedExpression(evaluatedExpression));
 

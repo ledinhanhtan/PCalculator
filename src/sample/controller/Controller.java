@@ -3,24 +3,24 @@ package sample.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import sample.model.Calculator;
 
 public class Controller {
     @FXML
     ScrollPane scrollPane;
     @FXML
-    Label result;
+    AnchorPane anchorPane;
 
     private Calculator calculator;
 
     @FXML
     public void initialize() {
         calculator = new Calculator();
-        calculator.setup(scrollPane, result);
+        calculator.setup(scrollPane, anchorPane);
     }
 
     @FXML

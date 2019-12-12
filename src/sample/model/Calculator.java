@@ -1,36 +1,34 @@
 package sample.model;
 
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import java.text.NumberFormat;
-import java.util.Locale;
 
 public class Calculator {
     private Expression expression;
-    private Label result;
+    private Result result;
     private Screen screen;
 
     private boolean calculated;
 
     private ScriptEngine engine;
 
-    public void setup(ScrollPane scrollPane, Label result) {
+    public void setup(ScrollPane scrollPane, AnchorPane anchorPane) {
         ScriptEngineManager mgr = new ScriptEngineManager();
         engine = mgr.getEngineByName("JavaScript");
 
         expression = new Expression();
         expression.setup(scrollPane);
 
+
+        result = new Result();
+        anchorPane.getChildren().add(result);
+
         screen = new Screen();
         screen.setup(expression, result);
-
-        this.result = result;
-        result.textProperty().addListener((observable, oldValue, newValue) ->
-                specialCase(newValue));
     }
 
     public void writeNumber(String number) {
@@ -94,40 +92,20 @@ public class Calculator {
     private void calculate() {
         if (!expression.isEmpty()) {
             try {
-                result.setText("=" + subString(formatNumberForResult(evaluate(
-                        expression.getExpression()))));
+                result.setResult(evaluate(expression.getExpression()));
             } catch (ScriptException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private String evaluate(String expr) throws ScriptException {
-        String result;
-        try {
-            result = Integer.toString((int) engine.eval(expr));
-        } catch (ClassCastException e) {
-            result = Double.toString((double) engine.eval(expr));
-        }
-        return result;
-    }
-
-    private String formatNumberForResult(String result) {
-        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
-        return numberFormat.format(Double.parseDouble(result));
-    }
-
-    //Todo
-    private String subString(String str) {
-        if (str.length() > 12) {
-            str = str.substring(0, 12);
-        }
-        return str;
+    private Number evaluate(String expr) throws ScriptException {
+        return (Number) engine.eval(expr);
     }
 
     public void equal() {
         if (!expression.isEmpty()) {
-            if (!isSpecialCase) {
+            if (!result.isSpecialCase()) {
                 screen.zoomZoom();
                 calculated = true;
             }
@@ -136,16 +114,6 @@ public class Calculator {
 
     private String getPreviousExpressionAndResult() {
         return expression.getExpression() + result.getText();
-    }
-
-    private boolean isSpecialCase;
-    private void specialCase(String newValue) {
-        if (newValue.matches("=∞|=-∞")) {
-            result.setText("=Can't divide by zero");
-            isSpecialCase = true;
-        } else {
-            isSpecialCase = false;
-        }
     }
 
     private void clear() {
@@ -161,7 +129,6 @@ public class Calculator {
     private void cl() {
         result.setText("0");
         calculated = false;
-        isSpecialCase = false;
         screen.zoomZoomReverse();
     }
 }
