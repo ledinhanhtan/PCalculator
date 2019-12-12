@@ -17,7 +17,7 @@ public class Screen {
         this.labels = expression.getLabels();
 
         expression.getExpressionProperty().addListener((observable, oldValue, newValue) ->
-                reSize(newValue.replaceAll("[,.]", "").length()));
+                autoResize(newValue.replaceAll("[,.]", "").length()));
     }
 
     public void zoomZoom() {
@@ -30,13 +30,14 @@ public class Screen {
 
     public void zoomZoomReverse() {
         expression.zoom(35);
+        expression.setStyleForLabels("#000000");
 
         result.setFont(new Font("System", 22));
         result.setStyle("-fx-text-fill: #b3b3b3");
     }
 
     //Todo switch
-    private void reSize(int length) {
+    private void autoResize(int length) {
         if (length == 8) {
             setSize(35);
         }
@@ -52,7 +53,7 @@ public class Screen {
         if (length == 12) {
             setSize(27);
         }
-        if (length == 13) {
+        if (length >= 13) {
             setSize(25);
         }
     }

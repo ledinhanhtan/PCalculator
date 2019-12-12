@@ -46,6 +46,8 @@ class NumberLabel extends SmartLabel {
         }
     }
 
+
+
     void writeDot() {
         if (!this.getText().contains(".")) {
             this.setText(this.getText() + ".");

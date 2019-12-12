@@ -12,7 +12,7 @@ import java.util.ArrayList;
 class Expression extends FlowPane {
     private final String[] operators = {"+", "-", "x", "÷"};
     private ArrayList<SmartLabel> labels;
-    private ArrayList<EvaluatedExpression> blankLabelList;
+    private ArrayList<FinishedExpression> blankLabelList;
 
     private boolean condition;
     private SimpleStringProperty expressionProperty;
@@ -43,7 +43,7 @@ class Expression extends FlowPane {
     private void addBlankLabel() {
         blankLabelList = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            EvaluatedExpression blankLabel = new EvaluatedExpression("");
+            FinishedExpression blankLabel = new FinishedExpression("");
             this.getChildren().add(blankLabel);
             blankLabelList.add(blankLabel);
         }
@@ -199,7 +199,7 @@ class Expression extends FlowPane {
     }
 
     void addFinishedLabel(String evaluatedExpression) {
-        this.getChildren().add(new EvaluatedExpression(evaluatedExpression));
+        this.getChildren().add(new FinishedExpression(evaluatedExpression));
 
         if (blankLabelList.size() > 0) {
             this.getChildren().remove(blankLabelList.get(0));

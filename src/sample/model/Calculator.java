@@ -54,15 +54,18 @@ public class Calculator {
     }
 
     public void writeOperator(String operator) {
-        //Ans, write a new expression begin with previous result (ans)
-        if (calculated) {
-            expression.addFinishedLabel(getPreviousExpressionAndResult());
-            String ans = result.getText().replaceAll("=", "");
-            clear();
-            writeNumber(ans);
-        }
+        //Block user enter any operator after a special case
+        if (result.isSpecialCase()) {
+            //Ans, write a new expression begin with previous result (ans)
+            if (calculated) {
+                expression.addFinishedLabel(getPreviousExpressionAndResult());
+                String ans = result.getText().replaceAll("=", "");
+                clear();
+                writeNumber(ans);
+            }
 
-        expression.writeOperator(operator);
+            expression.writeOperator(operator);
+        }
     }
 
     public void percent() {
@@ -77,15 +80,16 @@ public class Calculator {
     }
 
     public void delete() {
-        if (calculated) { calculated = false; }
+        if (calculated) {
+            calculated = false;
+            screen.zoomZoomReverse();
+        }
 
         expression.delete();
 
         if (expression.isEmpty()) { result.setText("0"); }
 
         calculate();
-
-        if (calculated) { screen.zoomZoomReverse(); }
     }
 
     private void calculate() {
@@ -104,7 +108,7 @@ public class Calculator {
 
     public void equal() {
         if (!expression.isEmpty()) {
-            if (!result.isSpecialCase()) {
+            if (result.isSpecialCase()) {
                 screen.zoomZoom();
                 calculated = true;
             }

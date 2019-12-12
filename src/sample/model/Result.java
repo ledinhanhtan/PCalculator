@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -29,9 +30,8 @@ public class Result extends Label {
 
     private void setup() {
         numberFormat = NumberFormat.getNumberInstance(Locale.US);
-        this.textProperty().addListener((observable, oldValue, newValue) -> {
-            specialCase(newValue);
-        });
+        this.textProperty().addListener((observable, oldValue, newValue) ->
+                specialCase(newValue));
     }
 
     void setResult(Number number) {
@@ -43,6 +43,10 @@ public class Result extends Label {
             if ((double) number < 1000 && result.length() > 12) {
                 result = result.substring(0, 12);
             }
+        }
+        if (Double.parseDouble(result) > 999999999) {
+            String num = BigDecimal.valueOf(Double.parseDouble(result)).stripTrailingZeros().toPlainString();
+            System.out.println(num);
         }
         result = numberFormat.format(Double.parseDouble(result));
         this.setText("=" + result);
@@ -58,6 +62,6 @@ public class Result extends Label {
     }
 
     boolean isSpecialCase() {
-        return isSpecialCase;
+        return !isSpecialCase;
     }
 }

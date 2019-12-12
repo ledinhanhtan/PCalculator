@@ -4,8 +4,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 
-class EvaluatedExpression extends Label {
-    EvaluatedExpression(String init) {
+class FinishedExpression extends Label {
+    FinishedExpression(String init) {
         super(init);
         format();
     }
