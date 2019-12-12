@@ -10,12 +10,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/view/sample.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/view/calculator.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("Calculator");
         primaryStage.setScene(new Scene(root, 230, 440));
         primaryStage.setResizable(false);
         primaryStage.show();
+        primaryStage.setOnCloseRequest(event -> System.exit(0));
     }
 
     public static void main(String[] args) {
