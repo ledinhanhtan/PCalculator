@@ -21,17 +21,19 @@ public class Calculator {
     public void setup(ScrollPane scrollPane, AnchorPane anchorPane, ImageView green, ImageView red) {
         ScriptEngineManager mgr = new ScriptEngineManager();
         engine = mgr.getEngineByName("JavaScript");
+        led = new Led(green, red);
 
         expression = new Expression();
         expression.setup(scrollPane);
 
         result = new Result();
+        result.setLed(led);
         anchorPane.getChildren().add(result);
 
         screen = new Screen();
         screen.setup(expression, result);
 
-        led = new Led(green, red);
+
     }
 
     public void writeNumber(String number) {

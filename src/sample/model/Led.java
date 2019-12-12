@@ -10,6 +10,8 @@ class Led {
     private ImageView red;
     private Timer timer;
 
+    private boolean disableGreen;
+
     Led(ImageView green, ImageView red) {
         this.green = green;
         this.red = red;
@@ -21,16 +23,14 @@ class Led {
     }
 
     void peak() {
-        green.setVisible(true);
-        timer.schedule(new TurnOffLed(), 100);
+        if (!disableGreen) {
+            green.setVisible(true);
+            timer.schedule(new TurnOffLed(), 100);
+        }
     }
 
     void on() {
         green.setVisible(true);
-    }
-
-    void redOn() {
-        red.setVisible(true);
     }
 
     void off() {
@@ -42,5 +42,15 @@ class Led {
         public void run() {
             green.setVisible(false);
         }
+    }
+
+    void redOn() {
+        red.setVisible(true);
+        disableGreen = true;
+    }
+
+    void redOff() {
+        red.setVisible(false);
+        disableGreen = false;
     }
 }

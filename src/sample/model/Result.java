@@ -14,6 +14,8 @@ public class Result extends Label {
     private NumberFormat localeFormatter;
     private NumberFormat decimalFormatter;
 
+    private Led led;
+
     Result() {
         format();
         setup();
@@ -35,6 +37,10 @@ public class Result extends Label {
 
         this.textProperty().addListener((observable, oldValue, newValue) ->
                 specialCase(newValue));
+    }
+
+    void setLed(Led led) {
+        this.led = led;
     }
 
     void setResult(Number number) {
@@ -60,8 +66,12 @@ public class Result extends Label {
         if (newValue.matches("=∞|=-∞")) {
             this.setText("=Can't divide by zero");
             isError = true;
+
+            led.redOn();
         } else {
             isError = false;
+
+            led.redOff();
         }
     }
 
