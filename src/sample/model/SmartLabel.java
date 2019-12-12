@@ -16,8 +16,8 @@ class SmartLabel extends Label {
     }
 
     void write(String str) {
-        if (this.getText() == null) {
-           this.setText(str);
+        if (this.getText().equals("")) {
+            this.setText(str);
         } else {
             concatOrReplace(str);
         }

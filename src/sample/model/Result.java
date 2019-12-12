@@ -5,13 +5,14 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 
-import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 
 public class Result extends Label {
     private boolean isSpecialCase;
-    private NumberFormat numberFormat;
+    private NumberFormat localeFormatter;
+    private NumberFormat decimalFormatter;
 
     Result() {
         format();
@@ -21,7 +22,7 @@ public class Result extends Label {
     private void format() {
         this.setText("0");
         this.setAlignment(Pos.CENTER_RIGHT);
-        this.setMinSize(260,50);
+        this.setMinSize(240,50);
         this.setFont(new Font("System", 22));
         this.setPadding(new Insets(0, 10, 0, 10));
 
@@ -29,7 +30,9 @@ public class Result extends Label {
     }
 
     private void setup() {
-        numberFormat = NumberFormat.getNumberInstance(Locale.US);
+        localeFormatter = NumberFormat.getNumberInstance(Locale.US);
+        decimalFormatter = new DecimalFormat("0.#####E0");
+
         this.textProperty().addListener((observable, oldValue, newValue) ->
                 specialCase(newValue));
     }
@@ -44,11 +47,12 @@ public class Result extends Label {
                 result = result.substring(0, 12);
             }
         }
+//.replace("E", "e"
         if (Double.parseDouble(result) > 999999999) {
-            String num = BigDecimal.valueOf(Double.parseDouble(result)).stripTrailingZeros().toPlainString();
-            System.out.println(num);
+            result = decimalFormatter.format(Double.parseDouble(result)).replace("E", "e");
+        } else {
+            result = localeFormatter.format(Double.parseDouble(result));
         }
-        result = numberFormat.format(Double.parseDouble(result));
         this.setText("=" + result);
     }
 

@@ -45,6 +45,7 @@ public class Calculator {
         if (calculated) {
             expression.addFinishedLabel(getPreviousExpressionAndResult());
             String ans = result.getText().replaceAll("=", "");
+
             clear();
             if (!ans.contains(".")) {
                writeNumber(ans + ".");

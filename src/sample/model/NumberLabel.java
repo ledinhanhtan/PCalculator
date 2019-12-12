@@ -23,6 +23,7 @@ class NumberLabel extends SmartLabel {
         }
     }
 
+    //Todo in here!
     private void autoComma(String newValue) {
         //Remove all comma to use format method
         newValue = newValue.replaceAll(",", "");

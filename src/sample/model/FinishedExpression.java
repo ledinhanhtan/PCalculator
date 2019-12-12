@@ -11,7 +11,7 @@ class FinishedExpression extends Label {
     }
 
     private void format() {
-        this.setMinWidth(260);
+        this.setMinWidth(240);
         this.setAlignment(Pos.CENTER_RIGHT);
         this.setFont(new Font("System", 20));
         this.setStyle("-fx-text-fill: #979696");
