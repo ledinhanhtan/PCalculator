@@ -47,7 +47,6 @@ public class Result extends Label {
                 result = result.substring(0, 12);
             }
         }
-//.replace("E", "e"
         if (Double.parseDouble(result) > 999999999) {
             result = decimalFormatter.format(Double.parseDouble(result)).replace("E", "e");
         } else {
@@ -56,6 +55,7 @@ public class Result extends Label {
         this.setText("=" + result);
     }
 
+    //Neu trong bieu thuc co dau / va result la ∞, giu nguyen dau vo cuc
     private void specialCase(String newValue) {
         if (newValue.matches("=∞|=-∞")) {
             this.setText("=Can't divide by zero");

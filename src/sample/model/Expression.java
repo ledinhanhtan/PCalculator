@@ -138,6 +138,10 @@ class Expression extends FlowPane {
         if (expr.contains("÷")) {
             expr = expr.replaceAll("÷", "/");
         }
+        //Fix later
+        if (getLastCharacter(expr).equals("e")) {
+            expr = expr.substring(0, expr.length() - 1);
+        }
         return expr;
     }
 

@@ -98,7 +98,9 @@ public class Calculator {
             try {
                 result.setResult(evaluate(expression.getExpression()));
             } catch (ScriptException e) {
+                //Freeze all method
                 e.printStackTrace();
+//                result.setText("=Error");
             }
         }
     }

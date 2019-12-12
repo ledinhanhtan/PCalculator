@@ -1,15 +1,26 @@
 package sample.model;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 
 class NumberLabel extends SmartLabel {
-    private NumberFormat numberFormat;
+//    private final BigInteger max = new BigInteger("");
+
+    private NumberFormat localFormatter;
+    private NumberFormat decimalFormatter;
 
     @Override
     void setup() {
-        numberFormat = NumberFormat.getNumberInstance(Locale.US);
-        this.textProperty().addListener((observable, oldValue, newValue) -> autoComma(newValue));
+        localFormatter = NumberFormat.getNumberInstance(Locale.US);
+        decimalFormatter = new DecimalFormat("0.#####E0");
+        this.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.contains("e")) {
+                autoComma(newValue);
+            }
+        });
     }
 
     @Override
@@ -17,7 +28,7 @@ class NumberLabel extends SmartLabel {
         //When user enter "0" in first index of a number, block user to add any number
         if (!this.getText().equals("0")) {
             //concat
-            if (this.getText().length() <= 15) {
+            if (this.getText().length() < 15) {
                 this.setText(this.getText() + number);
             }
         }
@@ -26,18 +37,20 @@ class NumberLabel extends SmartLabel {
     //Todo in here!
     private void autoComma(String newValue) {
         //Remove all comma to use format method
-        newValue = newValue.replaceAll(",", "");
+        if (newValue.contains(",")) {
+            newValue = newValue.replaceAll(",", "");
+        }
 
         if (newValue.length() > 3) {
             try {
                 //Add comma by formatting the number
-                this.setText(numberFormat.format(Integer.parseInt(
+                this.setText(localFormatter.format(Integer.parseInt(
                         newValue)));
             } catch (NumberFormatException e) {
                 //In case number are too large > 1B, format decimal. If number are < 1B,
                 //do not format number, so user can still write double number
                 if (Double.parseDouble(newValue) > 999999999) {
-                    this.setText(numberFormat.format(Double.parseDouble(
+                    this.setText(localFormatter.format(Double.parseDouble(
                         newValue)));
                 }
             }
