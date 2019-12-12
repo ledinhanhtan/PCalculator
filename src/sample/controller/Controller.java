@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -15,12 +16,17 @@ public class Controller {
     @FXML
     AnchorPane anchorPane;
 
+    @FXML
+    ImageView green;
+    @FXML
+    ImageView red;
+
     private Calculator calculator;
 
     @FXML
     public void initialize() {
         calculator = new Calculator();
-        calculator.setup(scrollPane, anchorPane);
+        calculator.setup(scrollPane, anchorPane, green, red);
     }
 
     @FXML

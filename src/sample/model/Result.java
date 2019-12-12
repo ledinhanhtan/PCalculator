@@ -10,7 +10,7 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class Result extends Label {
-    private boolean isSpecialCase;
+    private boolean isError;
     private NumberFormat localeFormatter;
     private NumberFormat decimalFormatter;
 
@@ -59,13 +59,13 @@ public class Result extends Label {
     private void specialCase(String newValue) {
         if (newValue.matches("=∞|=-∞")) {
             this.setText("=Can't divide by zero");
-            isSpecialCase = true;
+            isError = true;
         } else {
-            isSpecialCase = false;
+            isError = false;
         }
     }
 
-    boolean isSpecialCase() {
-        return !isSpecialCase;
+    boolean isNonError() {
+        return !isError;
     }
 }

@@ -1,6 +1,7 @@
 package sample.model;
 
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 import javax.script.ScriptEngine;
@@ -11,24 +12,26 @@ public class Calculator {
     private Expression expression;
     private Result result;
     private Screen screen;
+    private Led led;
 
     private boolean calculated;
 
     private ScriptEngine engine;
 
-    public void setup(ScrollPane scrollPane, AnchorPane anchorPane) {
+    public void setup(ScrollPane scrollPane, AnchorPane anchorPane, ImageView green, ImageView red) {
         ScriptEngineManager mgr = new ScriptEngineManager();
         engine = mgr.getEngineByName("JavaScript");
 
         expression = new Expression();
         expression.setup(scrollPane);
 
-
         result = new Result();
         anchorPane.getChildren().add(result);
 
         screen = new Screen();
         screen.setup(expression, result);
+
+        led = new Led(green, red);
     }
 
     public void writeNumber(String number) {
@@ -39,6 +42,8 @@ public class Calculator {
 
         expression.writeNumber(number);
         calculate();
+
+        led.peak();
     }
 
     public void writeDot() {
@@ -52,11 +57,13 @@ public class Calculator {
             }
         }
         expression.writeDot();
+
+        led.peak();
     }
 
     public void writeOperator(String operator) {
         //Block user enter any operator after a special case
-        if (result.isSpecialCase()) {
+        if (result.isNonError()) {
             //Ans, write a new expression begin with previous result (ans)
             if (calculated) {
                 expression.addFinishedLabel(getPreviousExpressionAndResult());
@@ -67,6 +74,8 @@ public class Calculator {
 
             expression.writeOperator(operator);
         }
+
+        led.peak();
     }
 
     public void percent() {
@@ -78,6 +87,8 @@ public class Calculator {
         }
         expression.percent();
         calculate();
+
+        led.peak();
     }
 
     public void delete() {
@@ -87,10 +98,11 @@ public class Calculator {
         }
 
         expression.delete();
-
         if (expression.isEmpty()) { result.setText("0"); }
 
         calculate();
+
+        led.peak();
     }
 
     private void calculate() {
@@ -98,7 +110,7 @@ public class Calculator {
             try {
                 result.setResult(evaluate(expression.getExpression()));
             } catch (ScriptException e) {
-                //Freeze all method
+                //Freeze all method, later
                 e.printStackTrace();
 //                result.setText("=Error");
             }
@@ -111,9 +123,11 @@ public class Calculator {
 
     public void equal() {
         if (!expression.isEmpty()) {
-            if (result.isSpecialCase()) {
+            if (result.isNonError()) {
                 screen.zoomZoom();
                 calculated = true;
+
+                led.on();
             }
         }
     }
@@ -136,5 +150,7 @@ public class Calculator {
         result.setText("0");
         calculated = false;
         screen.zoomZoomReverse();
+
+        led.off();
     }
 }
