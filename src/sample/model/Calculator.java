@@ -29,7 +29,8 @@ public class Calculator {
         screen.setup(expression, result);
 
         this.result = result;
-        result.textProperty().addListener((observable, oldValue, newValue) -> specialCase(newValue));
+        result.textProperty().addListener((observable, oldValue, newValue) ->
+                specialCase(newValue));
     }
 
     public void writeNumber(String number) {
@@ -126,8 +127,10 @@ public class Calculator {
 
     public void equal() {
         if (!expression.isEmpty()) {
-            screen.zoomZoom();
-            calculated = true;
+            if (!isSpecialCase) {
+                screen.zoomZoom();
+                calculated = true;
+            }
         }
     }
 
@@ -135,9 +138,13 @@ public class Calculator {
         return expression.getExpression() + result.getText();
     }
 
+    private boolean isSpecialCase;
     private void specialCase(String newValue) {
         if (newValue.matches("=∞|=-∞")) {
             result.setText("=Can't divide by zero");
+            isSpecialCase = true;
+        } else {
+            isSpecialCase = false;
         }
     }
 
@@ -154,6 +161,7 @@ public class Calculator {
     private void cl() {
         result.setText("0");
         calculated = false;
+        isSpecialCase = false;
         screen.zoomZoomReverse();
     }
 }
