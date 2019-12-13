@@ -26,11 +26,6 @@ public class Controller {
     public void initialize() {
         calculator = new Calculator();
         calculator.setup(scrollPane, anchorPaneForResult, green, red);
-
-        scrollPane.heightProperty().addListener(observable -> {
-            scrollPane.setVvalue(1);
-            scrollPane.setHvalue(1);
-        });
     }
 
     @FXML

@@ -4,6 +4,11 @@ import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 
 public class SmartLabel extends Label {
+    public SmartLabel(String init) {
+        super(init);
+        format();
+    }
+
     SmartLabel() {
         setup();
         format();

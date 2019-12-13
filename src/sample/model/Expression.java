@@ -5,7 +5,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Font;
-import sample.model.label.FinishedExpression;
 import sample.model.label.NumberLabel;
 import sample.model.label.OperatorLabel;
 import sample.model.label.SmartLabel;
@@ -15,8 +14,7 @@ import java.util.ArrayList;
 class Expression extends FlowPane {
     private final String[] operators = {"+", "-", "x", "÷"};
     private ArrayList<SmartLabel> labels;
-    private ArrayList<FinishedExpression> blankLabelList;
-
+//    private ArrayList<FinishedExpression> blankLabelList;
     private boolean condition;
     private SimpleStringProperty expressionProperty;
 
@@ -31,6 +29,11 @@ class Expression extends FlowPane {
         this.setPrefWrapLength(230);
     }
 
+    //TOdo
+    ArrayList<SmartLabel> getLabels() {
+        return labels;
+    }
+
     private void setup() {
         labels = new ArrayList<>();
 
@@ -38,7 +41,7 @@ class Expression extends FlowPane {
         expressionProperty.addListener((observable, oldValue, newValue) ->
                 autoResize(newValue.replaceAll("[,.]", "").length()));
 
-        addBlankLabel();
+//        addBlankLabel();
     }
 
     private void autoResize(int length) {
@@ -68,14 +71,14 @@ class Expression extends FlowPane {
         }
     }
 
-    private void addBlankLabel() {
-        blankLabelList = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            FinishedExpression blankLabel = new FinishedExpression("");
-            this.getChildren().add(blankLabel);
-            blankLabelList.add(blankLabel);
-        }
-    }
+//    private void addBlankLabel() {
+//        blankLabelList = new ArrayList<>();
+//        for (int i = 0; i < 3; i++) {
+//            FinishedExpression blankLabel = new FinishedExpression("");
+//            this.getChildren().add(blankLabel);
+//            blankLabelList.add(blankLabel);
+//        }
+//    }
 
     //---------------------
 
@@ -216,7 +219,7 @@ class Expression extends FlowPane {
 
     void allClear() {
         this.getChildren().clear();
-        addBlankLabel();
+//        addBlankLabel();
         labels.clear();
         condition = false;
         expressionProperty.setValue("");
@@ -234,14 +237,14 @@ class Expression extends FlowPane {
         }
     }
 
-    void addFinishedLabel(String evaluatedExpression) {
-        this.getChildren().add(new FinishedExpression(evaluatedExpression));
-
-        if (blankLabelList.size() > 0) {
-            this.getChildren().remove(blankLabelList.get(0));
-            blankLabelList.remove(0);
-        }
-    }
+//    void addFinishedLabel(String evaluatedExpression) {
+//        this.getChildren().add(new FinishedExpression(evaluatedExpression));
+//
+//        if (blankLabelList.size() > 0) {
+//            this.getChildren().remove(blankLabelList.get(0));
+//            blankLabelList.remove(0);
+//        }
+//    }
 
     private void updateProperty() {
         StringBuilder stringBuilder = new StringBuilder();

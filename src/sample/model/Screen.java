@@ -1,10 +1,14 @@
 package sample.model;
 
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
+//import java.util.ArrayList;
+
 class Screen extends VBox {
+//    private ArrayList<Expression> expressionList;
     private Expression expression;
     private Result result;
 
@@ -12,21 +16,25 @@ class Screen extends VBox {
         format();
     }
 
-    void setup(Expression expression, Result result) {
-        this.expression = expression;
+    void setup(Result result) {
+//        expressionList = new ArrayList<>();
         this.result = result;
-
-        this.getChildren().add(expression);
     }
 
     private void format() {
-        this.setPrefSize(240, 150);
-        this.setMaxSize(240, 150);
-
-//        this.setSpacing();
-
+        this.setPrefWidth(240);
         this.setAlignment(Pos.BOTTOM_RIGHT);
+        this.setSpacing(10);
+    }
 
+    void add(Expression expression) {
+        this.expression = expression;
+//        expressionList.add(expression);
+        this.getChildren().add(expression);
+    }
+
+    void addFinishedExpression(Expression expression, Label result) {
+        this.getChildren().add(0, new FinishedExpression(expression.getLabels(), result));
     }
 
     void zoomZoom() {

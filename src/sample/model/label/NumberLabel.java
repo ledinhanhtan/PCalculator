@@ -3,7 +3,6 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class NumberLabel extends SmartLabel {
-
     private NumberFormat localFormatter;
 
     @Override

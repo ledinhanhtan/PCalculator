@@ -32,13 +32,19 @@ public class Calculator {
         result.setLed(led);
         anchorPaneForResult.getChildren().add(result);
 
-        screen.setup(expression, result);
+        screen.setup(result);
+        screen.add(expression);
+        screen.heightProperty().addListener(observable -> {
+            scrollPane.setVvalue(1);
+            scrollPane.setHvalue(1);
+        });
         scrollPane.setContent(screen);
     }
 
     public void writeNumber(String number) {
         if (calculated) {
-            expression.addFinishedLabel(getPreviousExpressionAndResult());
+//            expression.addFinishedLabel(getPreviousExpressionAndResult());
+            screen.addFinishedExpression(expression, result);
             clear();
         }
 
@@ -50,7 +56,9 @@ public class Calculator {
 
     public void writeDot() {
         if (calculated) {
-            expression.addFinishedLabel(getPreviousExpressionAndResult());
+//            expression.addFinishedLabel(getPreviousExpressionAndResult());
+            screen.addFinishedExpression(expression, result);
+
             String ans = result.getText().replaceAll("=", "");
 
             clear();
@@ -68,7 +76,8 @@ public class Calculator {
         if (result.isNonError()) {
             //Ans, write a new expression begin with previous result (ans)
             if (calculated) {
-                expression.addFinishedLabel(getPreviousExpressionAndResult());
+//                expression.addFinishedLabel(getPreviousExpressionAndResult());
+                screen.addFinishedExpression(expression, result);
                 String ans = result.getText().replaceAll("=", "");
                 clear();
                 writeNumber(ans);
@@ -81,7 +90,9 @@ public class Calculator {
     public void percent() {
         if (calculated) {
             String ans = result.getText().replaceAll("=", "");
-            expression.addFinishedLabel(getPreviousExpressionAndResult());
+//            expression.addFinishedLabel(getPreviousExpressionAndResult());
+            screen.addFinishedExpression(expression, result);
+
             clear();
             writeNumber(ans);
         }
