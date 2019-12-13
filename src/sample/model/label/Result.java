@@ -35,9 +35,6 @@ public class Result extends Label {
     private void setup() {
         localeFormatter = NumberFormat.getNumberInstance(Locale.US);
         decimalFormatter = new DecimalFormat("0.#####E0");
-
-        this.textProperty().addListener((observable, oldValue, newValue) ->
-                specialCase(newValue));
     }
 
     public void setLed(Led led) {
@@ -45,34 +42,38 @@ public class Result extends Label {
     }
 
     public void setResult(Number number) {
-        String result;
-        try {
-            result = Integer.toString((int) number);
-        } catch (ClassCastException e) {
-            result = Double.toString((double) number);
-            if ((double) number < 1000 && result.length() > 12) {
-                result = result.substring(0, 12);
+        if (!isError(number)) {
+            String result;
+            try {
+                result = Integer.toString((int) number);
+            } catch (ClassCastException e) {
+                result = Double.toString((double) number);
+                if ((double) number < 1000 && result.length() > 12) {
+                    result = result.substring(0, 12);
+                }
             }
+            if (Double.parseDouble(result) > 999999999) {
+                result = decimalFormatter.format(Double.parseDouble(result)).replace("E", "e");
+            } else {
+                result = localeFormatter.format(Double.parseDouble(result));
+            }
+            this.setText("=" + result);
         }
-        if (Double.parseDouble(result) > 999999999) {
-            result = decimalFormatter.format(Double.parseDouble(result)).replace("E", "e");
-        } else {
-            result = localeFormatter.format(Double.parseDouble(result));
-        }
-        this.setText("=" + result);
     }
 
     //Neu trong bieu thuc co dau / va result la ∞, giu nguyen dau vo cuc
-    private void specialCase(String newValue) {
-        if (newValue.matches("=∞|=-∞")) {
+    private boolean isError(Number number) {
+        double num = Double.parseDouble(number.toString().replace("=", ""));
+        if (Double.isInfinite(num) || Double.isNaN(num)) {
             this.setText("=Can't divide by zero");
-            isError = true;
-
             led.redOn();
+            isError = true;
+            return true;
         } else {
-            isError = false;
-
             led.redOff();
+
+            isError = false;
+            return false;
         }
     }
 

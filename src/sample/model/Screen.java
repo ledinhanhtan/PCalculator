@@ -20,7 +20,8 @@ class Screen extends VBox {
     }
 
     private void format() {
-        this.setPrefWidth(240);
+        this.setPrefWidth(230);
+        this.setMaxWidth(230);
         this.setAlignment(Pos.BOTTOM_RIGHT);
         this.setSpacing(10);
     }

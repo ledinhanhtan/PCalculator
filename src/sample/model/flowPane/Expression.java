@@ -58,14 +58,12 @@ public class Expression extends SmartFlowPane {
     }
 
     public void writeNumber(String number) {
-        if (!(labels.size() == 0) || !number.equals("0")) {
-            if (!condition) {
-                add(new NumberLabel());
-                switchCondition();
-            }
-            getLastLabel().write(number);
-            updateProperty();
+        if (!condition) {
+            add(new NumberLabel());
+            switchCondition();
         }
+        getLastLabel().write(number);
+        updateProperty();
     }
 
     public void writeDot() {
@@ -87,7 +85,7 @@ public class Expression extends SmartFlowPane {
             getLastLabel().write(operator);
             updateProperty();
         } catch (ArrayIndexOutOfBoundsException ignored) {
-            System.out.println("First character can't not be an operator");
+            System.out.println("First character can't be an operator");
         }
     }
 
