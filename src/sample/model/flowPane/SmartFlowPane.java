@@ -1,4 +1,4 @@
-package sample.model;
+package sample.model.flowPane;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.FlowPane;

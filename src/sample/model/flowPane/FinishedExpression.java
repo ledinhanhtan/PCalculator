@@ -1,4 +1,4 @@
-package sample.model;
+package sample.model.flowPane;
 
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
@@ -7,7 +7,7 @@ import sample.model.label.SmartLabel;
 import java.util.ArrayList;
 
 public class FinishedExpression extends SmartFlowPane {
-    FinishedExpression(ArrayList<SmartLabel> labels, Label result) {
+    public FinishedExpression(ArrayList<SmartLabel> labels, Label result) {
         format();
 
         labels.add(new SmartLabel(result.getText()));

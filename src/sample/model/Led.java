@@ -5,14 +5,14 @@ import javafx.scene.image.ImageView;
 import java.util.Timer;
 import java.util.TimerTask;
 
-class Led {
+public class Led {
     private ImageView green;
     private ImageView red;
     private Timer timer;
 
     private boolean disableGreen;
 
-    Led(ImageView green, ImageView red) {
+    public Led(ImageView green, ImageView red) {
         this.green = green;
         this.red = red;
         setup();
@@ -44,12 +44,12 @@ class Led {
         }
     }
 
-    void redOn() {
+    public void redOn() {
         red.setVisible(true);
         disableGreen = true;
     }
 
-    void redOff() {
+    public void redOff() {
         red.setVisible(false);
         disableGreen = false;
     }

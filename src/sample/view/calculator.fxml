@@ -30,7 +30,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" pannable="true" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER" vvalue="1.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" pannable="true" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER" vvalue="1.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
                <padding>
                   <Insets right="10.0" />
                </padding>

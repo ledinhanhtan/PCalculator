@@ -1,9 +1,10 @@
-package sample.model;
+package sample.model.label;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
+import sample.model.Led;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -16,7 +17,7 @@ public class Result extends Label {
 
     private Led led;
 
-    Result() {
+    public Result() {
         format();
         setup();
     }
@@ -39,11 +40,11 @@ public class Result extends Label {
                 specialCase(newValue));
     }
 
-    void setLed(Led led) {
+    public void setLed(Led led) {
         this.led = led;
     }
 
-    void setResult(Number number) {
+    public void setResult(Number number) {
         String result;
         try {
             result = Integer.toString((int) number);
@@ -75,7 +76,7 @@ public class Result extends Label {
         }
     }
 
-    boolean isNonError() {
+    public boolean isNonError() {
         return !isError;
     }
 }

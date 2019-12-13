@@ -1,4 +1,4 @@
-package sample.model;
+package sample.model.flowPane;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.text.Font;
@@ -8,7 +8,7 @@ import sample.model.label.SmartLabel;
 
 import java.util.ArrayList;
 
-class Expression extends SmartFlowPane {
+public class Expression extends SmartFlowPane {
     private final String[] operators = {"+", "-", "x", "÷"};
 
     private boolean condition;
@@ -17,7 +17,7 @@ class Expression extends SmartFlowPane {
     //Use for auto resize
     private SimpleStringProperty expressionProperty;
 
-    Expression() {
+    public Expression() {
         setup();
         format();
     }
@@ -57,7 +57,7 @@ class Expression extends SmartFlowPane {
         }
     }
 
-    void writeNumber(String number) {
+    public void writeNumber(String number) {
         if (!(labels.size() == 0) || !number.equals("0")) {
             if (!condition) {
                 add(new NumberLabel());
@@ -68,7 +68,7 @@ class Expression extends SmartFlowPane {
         }
     }
 
-    void writeDot() {
+    public void writeDot() {
         try {
             NumberLabel numberLabel = (NumberLabel) getLastLabel();
             numberLabel.writeDot();
@@ -78,7 +78,7 @@ class Expression extends SmartFlowPane {
         updateProperty();
     }
 
-    void writeOperator(String operator) {
+    public void writeOperator(String operator) {
         if (condition) {
             add(new OperatorLabel());
             switchCondition();
@@ -91,7 +91,7 @@ class Expression extends SmartFlowPane {
         }
     }
 
-    void percent() {
+    public void percent() {
         try {
             NumberLabel lbl = (NumberLabel) getLastLabel();
             double number = Double.parseDouble(lbl.getText().replaceAll(",", ""));
@@ -104,7 +104,7 @@ class Expression extends SmartFlowPane {
         }
     }
 
-    void delete() {
+    public void delete() {
         if (labels.size() > 0) {
             SmartLabel lastLabel = labels.get(labels.size() - 1);
             lastLabel.deleteLastCharacter();
@@ -133,7 +133,7 @@ class Expression extends SmartFlowPane {
         labels.add(label);
     }
 
-    void reset() {
+    public void reset() {
         this.getChildren().clear();
         labels.clear();
         condition = false;
@@ -144,7 +144,7 @@ class Expression extends SmartFlowPane {
         return labels.get(labels.size() - 1);
     }
 
-    String getExpression() {
+    public String getExpression() {
         StringBuilder stringBuilder = new StringBuilder();
         for (SmartLabel label : labels) {
             stringBuilder.append(label.getText());
@@ -187,23 +187,23 @@ class Expression extends SmartFlowPane {
         return String.valueOf(expr.charAt(expr.length() - 1));
     }
 
-    boolean isEmpty() {
+    public boolean isEmpty() {
         return labels.size() == 0;
     }
 
-    void zoom(int size) {
+    public void zoom(int size) {
         for (SmartLabel lbl : labels) {
             lbl.setFont(new Font("System", size));
         }
     }
 
-    void setStyleForLabels(String hexColor) {
+    public void setStyleForLabels(String hexColor) {
         for (SmartLabel lbl : labels) {
             lbl.setStyle("-fx-text-fill: " + hexColor);
         }
     }
 
-    ArrayList<SmartLabel> getLabels() {
+    public ArrayList<SmartLabel> getLabels() {
         return labels;
     }
 

@@ -3,6 +3,8 @@ package sample.model;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import sample.model.flowPane.Expression;
+import sample.model.label.Result;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
