@@ -13,6 +13,8 @@ class Expression extends SmartFlowPane {
 
     private boolean condition;
     private ArrayList<SmartLabel> labels;
+
+    //Use for auto resize
     private SimpleStringProperty expressionProperty;
 
     Expression() {
@@ -124,8 +126,6 @@ class Expression extends SmartFlowPane {
         condition = !condition;
     }
 
-
-
     //-------------------
 
     private void add(SmartLabel label) {
@@ -133,7 +133,7 @@ class Expression extends SmartFlowPane {
         labels.add(label);
     }
 
-    void clear() {
+    void reset() {
         this.getChildren().clear();
         labels.clear();
         condition = false;

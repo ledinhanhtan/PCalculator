@@ -19,6 +19,8 @@ public class Controller {
     ImageView green;
     @FXML
     ImageView red;
+    @FXML
+    Button allClearButton;
 
     private Calculator calculator;
 
@@ -32,10 +34,15 @@ public class Controller {
     public void number(ActionEvent e) {
         Button button = (Button) e.getSource();
         calculator.writeNumber(button.getText());
+
+        allClearButton.setText("C");
     }
 
     @FXML
-    public void dot() { calculator.writeDot(); }
+    public void dot() {
+        calculator.writeDot();
+        allClearButton.setText("C");
+    }
 
     @FXML
     public void operator(ActionEvent e) {
@@ -53,27 +60,37 @@ public class Controller {
     public void delete() { calculator.delete(); }
 
     @FXML
-    public void allClear() { calculator.allClear(); }
+    public void allClear() {
+        if (allClearButton.getText().equals("C")) {
+            calculator.reset();
+        } else {
+            calculator.allClear();
+        }
+
+        allClearButton.setText("AC");
+    }
 
     public void keyEventHandler(KeyEvent keyEvent) {
         String key = keyEvent.getText();
 
         if (key.matches("[0-9]")) {
             calculator.writeNumber(key);
+            allClearButton.setText("C");
+        } else if (key.equals(".")) {
+            calculator.writeDot();
+            allClearButton.setText("C");
         } else if (key.matches("[+\\-]")) {
             calculator.writeOperator(key);
         } else if (key.equals("*")) {
             calculator.writeOperator("x");
         } else if (key.equals("/")) {
             calculator.writeOperator("÷");
-        } else if (key.equals(".")) {
-            calculator.writeDot();
         } else if (keyEvent.getCode().equals(KeyCode.BACK_SPACE)) {
-            calculator.delete();
+            delete();
         } else if (keyEvent.getCode().equals(KeyCode.ESCAPE)) {
-            calculator.allClear();
+            allClear();
         } else if (keyEvent.getCode().equals(KeyCode.ENTER)) {
-            calculator.equal();
+            equal();
         }
     }
 }

@@ -30,7 +30,7 @@ class Screen extends VBox {
     }
 
     void clear() {
-        expression.clear();
+        expression.reset();
         this.getChildren().clear();
         this.getChildren().add(expression);
     }

@@ -43,7 +43,7 @@ public class Calculator {
     public void writeNumber(String number) {
         if (calculated) {
             screen.addFinishedExpression(expression, result);
-            clear();
+            reset();
         }
 
         expression.writeNumber(number);
@@ -58,7 +58,7 @@ public class Calculator {
 
             String ans = result.getText().replaceAll("=", "");
 
-            clear();
+            reset();
             if (!ans.contains(".")) {
                writeNumber(ans + ".");
             }
@@ -75,7 +75,7 @@ public class Calculator {
             if (calculated) {
                 screen.addFinishedExpression(expression, result);
                 String ans = result.getText().replaceAll("=", "");
-                clear();
+                reset();
                 writeNumber(ans);
             }
             expression.writeOperator(operator);
@@ -88,7 +88,7 @@ public class Calculator {
             String ans = result.getText().replaceAll("=", "");
             screen.addFinishedExpression(expression, result);
 
-            clear();
+            reset();
             writeNumber(ans);
         }
         expression.percent();
@@ -138,12 +138,15 @@ public class Calculator {
         }
     }
 
-    private void clear() {
-        expression.clear();
+    public void reset() {
+        expression.reset();
         cl();
     }
 
-
+    public void allClear() {
+        screen.clear();
+        cl();
+    }
 
     private void cl() {
         calculated = false;
@@ -151,10 +154,5 @@ public class Calculator {
         screen.zoomZoomReverse();
 
         led.off();
-    }
-
-    public void allClear() {
-        screen.clear();
-        cl();
     }
 }

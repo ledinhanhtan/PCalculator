@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class FinishedExpression extends SmartFlowPane {
     FinishedExpression(ArrayList<SmartLabel> labels, Label result) {
-        System.out.println("got");
         format();
 
         labels.add(new SmartLabel(result.getText()));
