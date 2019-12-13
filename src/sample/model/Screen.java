@@ -1,44 +1,35 @@
 package sample.model;
 
-import javafx.geometry.Insets;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
+import javafx.geometry.Pos;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-public class Screen extends ScrollPane {
+class Screen extends VBox {
     private Expression expression;
     private Result result;
 
-    public Screen() {
+    Screen() {
         format();
     }
 
-    public void setup(Expression expression, Result result) {
+    void setup(Expression expression, Result result) {
         this.expression = expression;
         this.result = result;
 
-        this.setContent(expression);
-        this.heightProperty().addListener(observable-> {
-            this.setVvalue(1);
-            this.setHvalue(1);
-        });
+        this.getChildren().add(expression);
     }
 
     private void format() {
-        this.setPadding(new Insets(0, 10, 0, 10));
-        AnchorPane.setTopAnchor(this, 0.0);
-        AnchorPane.setRightAnchor(this, 0.0);
-        AnchorPane.setBottomAnchor(this, 0.0);
-        AnchorPane.setLeftAnchor(this, 0.0);
+        this.setPrefSize(240, 150);
+        this.setMaxSize(240, 150);
 
-        this.setVbarPolicy(ScrollBarPolicy.NEVER);
-        this.setHbarPolicy(ScrollBarPolicy.NEVER);
-        this.setPannable(true);
+//        this.setSpacing();
 
-        this.setStyle("-fx-background-color: transparent");
+        this.setAlignment(Pos.BOTTOM_RIGHT);
+
     }
 
-    public void zoomZoom() {
+    void zoomZoom() {
         expression.zoom(25);
         expression.setStyleForLabels("#666666");
 
@@ -46,7 +37,7 @@ public class Screen extends ScrollPane {
         result.setStyle("-fx-text-fill: #000000");
     }
 
-    public void zoomZoomReverse() {
+    void zoomZoomReverse() {
         expression.zoom(35);
         expression.setStyleForLabels("#000000");
 

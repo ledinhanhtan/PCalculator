@@ -77,6 +77,8 @@ class Expression extends FlowPane {
         }
     }
 
+    //---------------------
+
     void writeNumber(String number) {
         if (!(labels.size() == 0) || !number.equals("0")) {
             if (!condition) {
@@ -134,6 +136,8 @@ class Expression extends FlowPane {
             }
         }
     }
+
+    //-------------------
 
     private void add(SmartLabel label) {
         this.getChildren().add(label);
@@ -237,14 +241,6 @@ class Expression extends FlowPane {
             this.getChildren().remove(blankLabelList.get(0));
             blankLabelList.remove(0);
         }
-    }
-
-    SimpleStringProperty getExpressionProperty() {
-        return expressionProperty;
-    }
-
-    ArrayList<SmartLabel> getLabels() {
-        return labels;
     }
 
     private void updateProperty() {

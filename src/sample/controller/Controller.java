@@ -3,6 +3,7 @@ package sample.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -11,7 +12,7 @@ import sample.model.Calculator;
 
 public class Controller {
     @FXML
-    AnchorPane anchorPaneForScreen;
+    ScrollPane scrollPane;
     @FXML
     AnchorPane anchorPaneForResult;
     @FXML
@@ -24,7 +25,12 @@ public class Controller {
     @FXML
     public void initialize() {
         calculator = new Calculator();
-        calculator.setup(anchorPaneForScreen, anchorPaneForResult, green, red);
+        calculator.setup(scrollPane, anchorPaneForResult, green, red);
+
+        scrollPane.heightProperty().addListener(observable -> {
+            scrollPane.setVvalue(1);
+            scrollPane.setHvalue(1);
+        });
     }
 
     @FXML

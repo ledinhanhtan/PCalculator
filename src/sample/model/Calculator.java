@@ -1,5 +1,6 @@
 package sample.model;
 
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -16,20 +17,23 @@ public class Calculator {
     private boolean calculated;
     private ScriptEngine engine;
 
-    public void setup(AnchorPane anchorPaneForScreen, AnchorPane anchorPaneForResult, ImageView green, ImageView red) {
+    public Calculator() {
+        expression = new Expression();
+        result = new Result();
+        screen = new Screen();
+
         ScriptEngineManager mgr = new ScriptEngineManager();
         engine = mgr.getEngineByName("JavaScript");
+    }
+
+    public void setup(ScrollPane scrollPane, AnchorPane anchorPaneForResult, ImageView green, ImageView red) {
         led = new Led(green, red);
 
-
-        result = new Result();
         result.setLed(led);
         anchorPaneForResult.getChildren().add(result);
 
-        expression = new Expression();
-        screen = new Screen();
         screen.setup(expression, result);
-        anchorPaneForScreen.getChildren().add(screen);
+        scrollPane.setContent(screen);
     }
 
     public void writeNumber(String number) {
