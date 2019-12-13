@@ -26,6 +26,7 @@ public class SmartLabel extends Label {
     void concatOrReplace(String str) {}
 
     public void deleteLastCharacter() {
-        this.setText(this.getText().substring(0, this.getText().length() - 1));
+        this.setText(this.getText().
+                substring(0, this.getText().length() - 1));
     }
 }

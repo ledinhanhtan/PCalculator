@@ -11,11 +11,10 @@ import javax.script.ScriptException;
 public class Calculator {
     private Expression expression;
     private Result result;
-    private Screen screen;
+    private OldScreen oldScreen;
     private Led led;
 
     private boolean calculated;
-
     private ScriptEngine engine;
 
     public void setup(ScrollPane scrollPane, AnchorPane anchorPane, ImageView green, ImageView red) {
@@ -30,10 +29,8 @@ public class Calculator {
         result.setLed(led);
         anchorPane.getChildren().add(result);
 
-        screen = new Screen();
-        screen.setup(expression, result);
-
-
+        oldScreen = new OldScreen();
+        oldScreen.setup(expression, result);
     }
 
     public void writeNumber(String number) {
@@ -73,10 +70,8 @@ public class Calculator {
                 clear();
                 writeNumber(ans);
             }
-
             expression.writeOperator(operator);
         }
-
         led.peak();
     }
 
@@ -96,7 +91,7 @@ public class Calculator {
     public void delete() {
         if (calculated) {
             calculated = false;
-            screen.zoomZoomReverse();
+            oldScreen.zoomZoomReverse();
         }
 
         expression.delete();
@@ -126,7 +121,7 @@ public class Calculator {
     public void equal() {
         if (!expression.isEmpty()) {
             if (result.isNonError()) {
-                screen.zoomZoom();
+                oldScreen.zoomZoom();
                 calculated = true;
 
                 led.on();
@@ -151,7 +146,7 @@ public class Calculator {
     private void cl() {
         result.setText("0");
         calculated = false;
-        screen.zoomZoomReverse();
+        oldScreen.zoomZoomReverse();
 
         led.off();
     }

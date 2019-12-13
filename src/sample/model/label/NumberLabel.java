@@ -27,7 +27,6 @@ public class NumberLabel extends SmartLabel {
         }
     }
 
-    //Todo in here!
     private void autoComma(String newValue) {
         //Remove all comma to use format method
         if (newValue.contains(",")) {
@@ -52,8 +51,6 @@ public class NumberLabel extends SmartLabel {
             this.setText(this.getText().replaceAll(",", ""));
         }
     }
-
-
 
     public void writeDot() {
         if (!this.getText().contains(".")) {

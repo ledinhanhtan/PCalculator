@@ -15,7 +15,6 @@ public class Controller {
     ScrollPane scrollPane;
     @FXML
     AnchorPane anchorPane;
-
     @FXML
     ImageView green;
     @FXML
