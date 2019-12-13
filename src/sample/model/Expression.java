@@ -1,9 +1,6 @@
 package sample.model;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Font;
 import sample.model.label.NumberLabel;
 import sample.model.label.OperatorLabel;
@@ -11,27 +8,16 @@ import sample.model.label.SmartLabel;
 
 import java.util.ArrayList;
 
-class Expression extends FlowPane {
+class Expression extends SmartFlowPane {
     private final String[] operators = {"+", "-", "x", "÷"};
-    private ArrayList<SmartLabel> labels;
-//    private ArrayList<FinishedExpression> blankLabelList;
+
     private boolean condition;
+    private ArrayList<SmartLabel> labels;
     private SimpleStringProperty expressionProperty;
 
     Expression() {
         setup();
         format();
-    }
-
-    private void format() {
-        this.setAlignment(Pos.BOTTOM_RIGHT);
-        this.setMaxWidth(230);
-        this.setPrefWrapLength(230);
-    }
-
-    //TOdo
-    ArrayList<SmartLabel> getLabels() {
-        return labels;
     }
 
     private void setup() {
@@ -40,8 +26,6 @@ class Expression extends FlowPane {
         expressionProperty = new SimpleStringProperty("");
         expressionProperty.addListener((observable, oldValue, newValue) ->
                 autoResize(newValue.replaceAll("[,.]", "").length()));
-
-//        addBlankLabel();
     }
 
     private void autoResize(int length) {
@@ -70,17 +54,6 @@ class Expression extends FlowPane {
             lbl.setFont(new Font("System", size));
         }
     }
-
-//    private void addBlankLabel() {
-//        blankLabelList = new ArrayList<>();
-//        for (int i = 0; i < 3; i++) {
-//            FinishedExpression blankLabel = new FinishedExpression("");
-//            this.getChildren().add(blankLabel);
-//            blankLabelList.add(blankLabel);
-//        }
-//    }
-
-    //---------------------
 
     void writeNumber(String number) {
         if (!(labels.size() == 0) || !number.equals("0")) {
@@ -140,11 +113,31 @@ class Expression extends FlowPane {
         }
     }
 
+    private void remove(SmartLabel lastLabel) {
+        labels.remove(lastLabel);
+        this.getChildren().remove(lastLabel);
+
+        switchCondition();
+    }
+
+    private void switchCondition() {
+        condition = !condition;
+    }
+
+
+
     //-------------------
 
     private void add(SmartLabel label) {
         this.getChildren().add(label);
         labels.add(label);
+    }
+
+    void clear() {
+        this.getChildren().clear();
+        labels.clear();
+        condition = false;
+        expressionProperty.setValue("");
     }
 
     private SmartLabel getLastLabel() {
@@ -194,35 +187,8 @@ class Expression extends FlowPane {
         return String.valueOf(expr.charAt(expr.length() - 1));
     }
 
-    private void remove(SmartLabel lastLabel) {
-        labels.remove(lastLabel);
-        this.getChildren().remove(lastLabel);
-
-        switchCondition();
-    }
-
-    private void switchCondition() {
-        condition = !condition;
-    }
-
     boolean isEmpty() {
         return labels.size() == 0;
-    }
-
-    void clear() {
-        for (Label lbl : labels) {
-            this.getChildren().remove(lbl);
-        }
-        labels.clear();
-        condition = false;
-    }
-
-    void allClear() {
-        this.getChildren().clear();
-//        addBlankLabel();
-        labels.clear();
-        condition = false;
-        expressionProperty.setValue("");
     }
 
     void zoom(int size) {
@@ -237,14 +203,9 @@ class Expression extends FlowPane {
         }
     }
 
-//    void addFinishedLabel(String evaluatedExpression) {
-//        this.getChildren().add(new FinishedExpression(evaluatedExpression));
-//
-//        if (blankLabelList.size() > 0) {
-//            this.getChildren().remove(blankLabelList.get(0));
-//            blankLabelList.remove(0);
-//        }
-//    }
+    ArrayList<SmartLabel> getLabels() {
+        return labels;
+    }
 
     private void updateProperty() {
         StringBuilder stringBuilder = new StringBuilder();

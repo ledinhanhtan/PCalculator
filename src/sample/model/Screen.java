@@ -5,10 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-//import java.util.ArrayList;
-
 class Screen extends VBox {
-//    private ArrayList<Expression> expressionList;
     private Expression expression;
     private Result result;
 
@@ -16,8 +13,9 @@ class Screen extends VBox {
         format();
     }
 
-    void setup(Result result) {
-//        expressionList = new ArrayList<>();
+    void setup(Expression expression, Result result) {
+        this.expression = expression;
+        this.getChildren().add(expression);
         this.result = result;
     }
 
@@ -27,14 +25,14 @@ class Screen extends VBox {
         this.setSpacing(10);
     }
 
-    void add(Expression expression) {
-        this.expression = expression;
-//        expressionList.add(expression);
-        this.getChildren().add(expression);
-    }
-
     void addFinishedExpression(Expression expression, Label result) {
         this.getChildren().add(0, new FinishedExpression(expression.getLabels(), result));
+    }
+
+    void clear() {
+        expression.clear();
+        this.getChildren().clear();
+        this.getChildren().add(expression);
     }
 
     void zoomZoom() {

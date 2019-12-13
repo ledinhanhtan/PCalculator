@@ -32,8 +32,7 @@ public class Calculator {
         result.setLed(led);
         anchorPaneForResult.getChildren().add(result);
 
-        screen.setup(result);
-        screen.add(expression);
+        screen.setup(expression, result);
         screen.heightProperty().addListener(observable -> {
             scrollPane.setVvalue(1);
             scrollPane.setHvalue(1);
@@ -43,7 +42,6 @@ public class Calculator {
 
     public void writeNumber(String number) {
         if (calculated) {
-//            expression.addFinishedLabel(getPreviousExpressionAndResult());
             screen.addFinishedExpression(expression, result);
             clear();
         }
@@ -56,7 +54,6 @@ public class Calculator {
 
     public void writeDot() {
         if (calculated) {
-//            expression.addFinishedLabel(getPreviousExpressionAndResult());
             screen.addFinishedExpression(expression, result);
 
             String ans = result.getText().replaceAll("=", "");
@@ -76,7 +73,6 @@ public class Calculator {
         if (result.isNonError()) {
             //Ans, write a new expression begin with previous result (ans)
             if (calculated) {
-//                expression.addFinishedLabel(getPreviousExpressionAndResult());
                 screen.addFinishedExpression(expression, result);
                 String ans = result.getText().replaceAll("=", "");
                 clear();
@@ -90,7 +86,6 @@ public class Calculator {
     public void percent() {
         if (calculated) {
             String ans = result.getText().replaceAll("=", "");
-//            expression.addFinishedLabel(getPreviousExpressionAndResult());
             screen.addFinishedExpression(expression, result);
 
             clear();
@@ -143,25 +138,23 @@ public class Calculator {
         }
     }
 
-    private String getPreviousExpressionAndResult() {
-        return expression.getExpression() + result.getText();
-    }
-
     private void clear() {
         expression.clear();
         cl();
     }
 
-    public void allClear() {
-        expression.allClear();
-        cl();
-    }
+
 
     private void cl() {
-        result.setText("0");
         calculated = false;
+        result.setText("0");
         screen.zoomZoomReverse();
 
         led.off();
+    }
+
+    public void allClear() {
+        screen.clear();
+        cl();
     }
 }
