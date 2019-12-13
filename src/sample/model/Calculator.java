@@ -1,6 +1,5 @@
 package sample.model;
 
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -9,28 +8,28 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
 public class Calculator {
+    private Screen screen;
     private Expression expression;
     private Result result;
-    private OldScreen oldScreen;
     private Led led;
 
     private boolean calculated;
     private ScriptEngine engine;
 
-    public void setup(ScrollPane scrollPane, AnchorPane anchorPane, ImageView green, ImageView red) {
+    public void setup(AnchorPane anchorPaneForScreen, AnchorPane anchorPaneForResult, ImageView green, ImageView red) {
         ScriptEngineManager mgr = new ScriptEngineManager();
         engine = mgr.getEngineByName("JavaScript");
         led = new Led(green, red);
 
-        expression = new Expression();
-        expression.setup(scrollPane);
 
         result = new Result();
         result.setLed(led);
-        anchorPane.getChildren().add(result);
+        anchorPaneForResult.getChildren().add(result);
 
-        oldScreen = new OldScreen();
-        oldScreen.setup(expression, result);
+        expression = new Expression();
+        screen = new Screen();
+        screen.setup(expression, result);
+        anchorPaneForScreen.getChildren().add(screen);
     }
 
     public void writeNumber(String number) {
@@ -91,7 +90,7 @@ public class Calculator {
     public void delete() {
         if (calculated) {
             calculated = false;
-            oldScreen.zoomZoomReverse();
+            screen.zoomZoomReverse();
         }
 
         expression.delete();
@@ -121,7 +120,7 @@ public class Calculator {
     public void equal() {
         if (!expression.isEmpty()) {
             if (result.isNonError()) {
-                oldScreen.zoomZoom();
+                screen.zoomZoom();
                 calculated = true;
 
                 led.on();
@@ -146,7 +145,7 @@ public class Calculator {
     private void cl() {
         result.setText("0");
         calculated = false;
-        oldScreen.zoomZoomReverse();
+        screen.zoomZoomReverse();
 
         led.off();
     }

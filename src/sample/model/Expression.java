@@ -3,7 +3,6 @@ package sample.model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Font;
 import sample.model.label.FinishedExpression;
@@ -22,6 +21,7 @@ class Expression extends FlowPane {
     private SimpleStringProperty expressionProperty;
 
     Expression() {
+        setup();
         format();
     }
 
@@ -31,18 +31,41 @@ class Expression extends FlowPane {
         this.setPrefWrapLength(230);
     }
 
-    void setup(ScrollPane parent) {
+    private void setup() {
         labels = new ArrayList<>();
 
         expressionProperty = new SimpleStringProperty("");
-
-        parent.setContent(this);
-        this.heightProperty().addListener(observable-> {
-            parent.setVvalue(1);
-            parent.setHvalue(1);
-        });
+        expressionProperty.addListener((observable, oldValue, newValue) ->
+                autoResize(newValue.replaceAll("[,.]", "").length()));
 
         addBlankLabel();
+    }
+
+    private void autoResize(int length) {
+        if (length == 8) {
+            setSize(35);
+        }
+        if (length == 9) {
+            setSize(33);
+        }
+        if (length == 10) {
+            setSize(31);
+        }
+        if (length == 11) {
+            setSize(29);
+        }
+        if (length == 12) {
+            setSize(27);
+        }
+        if (length >= 13) {
+            setSize(25);
+        }
+    }
+
+    private void setSize(int size) {
+        for (SmartLabel lbl : labels) {
+            lbl.setFont(new Font("System", size));
+        }
     }
 
     private void addBlankLabel() {
