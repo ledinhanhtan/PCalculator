@@ -135,10 +135,17 @@
                   <Font size="22.0" />
                </font>
             </Button>
-            <Button layoutX="130.0" layoutY="60.0" mnemonicParsing="false" onAction="#operator" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="x" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <Button alignment="CENTER_RIGHT" layoutX="130.0" layoutY="60.0" mnemonicParsing="false" onAction="#operator" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="x" textAlignment="JUSTIFY" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <font>
                   <Font size="18.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="10.0" fitWidth="10.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resource/icon/x.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
             <Button layoutX="130.0" layoutY="110.0" mnemonicParsing="false" onAction="#operator" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0 0 0.2 0.2;" text="-" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <font>
