@@ -196,8 +196,11 @@ public class Expression extends SmartFlowPane {
     }
 
     public void setStyleForLabels(String hexColor) {
+        int state = 1;
+        if (hexColor.equals("#666666")) state = 2;
         for (SmartLabel lbl : labels) {
             lbl.setStyle("-fx-text-fill: " + hexColor);
+            lbl.setState(state);
         }
     }
 

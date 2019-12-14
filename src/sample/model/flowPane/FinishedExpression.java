@@ -12,9 +12,10 @@ public class FinishedExpression extends SmartFlowPane {
 
         labels.add(new SmartLabel(result.getText()));
 
-        for (Label lbl : labels) {
+        for (SmartLabel lbl : labels) {
             lbl.setFont(new Font("System", 20));
             lbl.setStyle("-fx-text-fill: #979696");
+            lbl.setState(3);
             this.getChildren().add(lbl);
         }
     }

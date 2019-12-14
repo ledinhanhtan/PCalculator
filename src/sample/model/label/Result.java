@@ -18,8 +18,13 @@ public class Result extends Label {
     private Led led;
 
     public Result() {
-        format();
         setup();
+        format();
+    }
+
+    private void setup() {
+        localeFormatter = NumberFormat.getNumberInstance(Locale.US);
+        decimalFormatter = new DecimalFormat("0.#####E0");
     }
 
     private void format() {
@@ -30,11 +35,6 @@ public class Result extends Label {
         this.setPadding(new Insets(0, 10, 0, 10));
 
         this.setStyle("-fx-text-fill: #b3b3b3");
-    }
-
-    private void setup() {
-        localeFormatter = NumberFormat.getNumberInstance(Locale.US);
-        decimalFormatter = new DecimalFormat("0.#####E0");
     }
 
     public void setLed(Led led) {

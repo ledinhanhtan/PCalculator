@@ -7,6 +7,7 @@ public class NumberLabel extends SmartLabel {
 
     @Override
     void setup() {
+        super.setup();
         localFormatter = NumberFormat.getNumberInstance(Locale.US);
         this.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.contains("e")) {
