@@ -189,7 +189,7 @@ public class Expression extends SmartFlowPane {
         return labels.size() == 0;
     }
 
-    public void zoom(int size) {
+    public void zoom(double size) {
         for (SmartLabel lbl : labels) {
             lbl.setFont(new Font("System", size));
         }

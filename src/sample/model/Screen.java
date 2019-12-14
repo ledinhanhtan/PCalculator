@@ -64,6 +64,7 @@ class Screen extends VBox {
 
         result.setFont(new Font("System", 35));
         result.setStyle("-fx-text-fill: #000000");
+        result.setState(1);
     }
 
     void zoomZoomReverse() {
@@ -71,6 +72,7 @@ class Screen extends VBox {
         expression.setStyleForLabels("#000000");
 
         result.setFont(new Font("System", 22));
-        result.setStyle("-fx-text-fill: #b3b3b3");
+        result.setStyle("-fx-text-fill: #979696");
+        result.setState(3);
     }
 }

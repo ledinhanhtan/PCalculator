@@ -18,14 +18,14 @@
          <children>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <ImageView fx:id="red" fitHeight="10.0" fitWidth="10.0" layoutX="225.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                  <ImageView fx:id="green" fitHeight="6.0" fitWidth="6.0" layoutX="200.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="7.0">
                      <image>
-                        <Image url="@../resource/icon/red.png" />
+                        <Image url="@../resource/icon/green.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="green" fitHeight="10.0" fitWidth="10.0" layoutX="200.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                  <ImageView fx:id="red" fitHeight="6.0" fitWidth="6.0" layoutX="225.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="7.0">
                      <image>
-                        <Image url="@../resource/icon/green.png" />
+                        <Image url="@../resource/icon/red.jpg" />
                      </image>
                   </ImageView>
                </children>

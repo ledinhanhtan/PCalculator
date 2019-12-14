@@ -21,7 +21,7 @@ public class NumberLabel extends SmartLabel {
         //When user enter "0" in first index of a number, block user to add any number
         if (!this.getText().equals("0")) {
             //concat
-            if (this.getText().length() < 15) {
+            if (this.getText().length() < 16) {
                 this.setText(this.getText() + number);
             }
         }

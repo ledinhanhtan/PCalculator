@@ -19,7 +19,7 @@ public class SmartLabel extends Label {
             "-fx-border-width: 0.6px;";
 
     //state == 1: BLACK   //state == 2: GREY   //state == 3: WHITE_GREY
-    private int state = 1;
+    int state = 1;
 
     public SmartLabel(String init) {
         super(init);

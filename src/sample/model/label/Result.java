@@ -2,7 +2,7 @@ package sample.model.label;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import sample.model.Led;
 
@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class Result extends Label {
+public class Result extends SmartLabel {
     private boolean isError;
     private NumberFormat localeFormatter;
     private NumberFormat decimalFormatter;
@@ -22,7 +22,10 @@ public class Result extends Label {
         format();
     }
 
-    private void setup() {
+    @Override
+    void setup() {
+        super.setup();
+        this.state = 3;
         localeFormatter = NumberFormat.getNumberInstance(Locale.US);
         decimalFormatter = new DecimalFormat("0.#####E0");
     }
@@ -30,11 +33,12 @@ public class Result extends Label {
     private void format() {
         this.setText("0");
         this.setAlignment(Pos.CENTER_RIGHT);
-        this.setMinSize(240,50);
+//        this.setMinSize(240,50);
+        this.setMinHeight(50);
+        AnchorPane.setRightAnchor(this, 0.);
         this.setFont(new Font("System", 22));
         this.setPadding(new Insets(0, 10, 0, 10));
-
-        this.setStyle("-fx-text-fill: #b3b3b3");
+        this.setStyle("-fx-text-fill: #979696");
     }
 
     public void setLed(Led led) {
