@@ -16,4 +16,4 @@ Copy/Handle error
 ![](screenshot/error.png)
 
 
-Hạn chế: không xử lý được các số < 0.0005
+Hạn chế: không ghi nhận các số < 0.0005
