@@ -205,6 +205,9 @@ public class Expression extends SmartFlowPane {
     }
 
     public ArrayList<SmartLabel> getLabels() {
+        if (isLastCharacterAOperator(expressionProperty.getValue())) {
+            labels.remove(labels.size() - 1);
+        }
         return labels;
     }
 
