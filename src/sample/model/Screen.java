@@ -1,5 +1,6 @@
 package sample.model;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -24,12 +25,13 @@ class Screen extends VBox {
         this.setMaxWidth(230);
         this.setAlignment(Pos.BOTTOM_RIGHT);
         this.setSpacing(10);
+        this.setPadding(new Insets(0, 0, 3, 0));
     }
 
     void setup(Expression expression, Result result) {
         invisiblePane = new Pane();
 //        invisiblePane.setStyle("-fx-background-color: yellow");
-        invisiblePane.setPrefHeight(68);
+        invisiblePane.setPrefHeight(65);
         invisiblePane.setMaxWidth(220);
         this.getChildren().add(invisiblePane);
 
@@ -44,7 +46,7 @@ class Screen extends VBox {
         //Always add to bottom of set of FinishedExpressions
         index++;
 
-        if (index == 2) invisiblePane.setPrefHeight(28);
+        if (index == 2) invisiblePane.setPrefHeight(25);
         if (index == 3) invisiblePane.setPrefHeight(0.1);
     }
 
