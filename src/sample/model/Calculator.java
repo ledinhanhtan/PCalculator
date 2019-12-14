@@ -35,9 +35,10 @@ public class Calculator {
         anchorPaneForResult.getChildren().add(result);
 
         screen.setup(expression, result);
-        screen.heightProperty().addListener(observable -> {
-            scrollPane.setVvalue(1);
-            scrollPane.setHvalue(1);
+        screen.heightProperty().addListener((observable, oldValue, newValue) -> {
+            if ((double) newValue - (double) oldValue > 5) {
+                scrollPane.setVvalue(1);
+            }
         });
         scrollPane.setContent(screen);
     }
