@@ -20,12 +20,12 @@
                <children>
                   <ImageView fx:id="green" fitHeight="6.0" fitWidth="6.0" layoutX="200.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="7.0">
                      <image>
-                        <Image url="@../resource/icon/green.jpg" />
+                        <Image url="@../resource/green.jpg" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="red" fitHeight="6.0" fitWidth="6.0" layoutX="225.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="7.0">
                      <image>
-                        <Image url="@../resource/icon/red.jpg" />
+                        <Image url="@../resource/red.jpg" />
                      </image>
                   </ImageView>
                </children>
@@ -127,7 +127,7 @@
             </Button>
             <Button layoutX="70.0" layoutY="10.0" mnemonicParsing="false" onAction="#percent" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0.2 0 0.2 0.2;" text="\%" GridPane.columnIndex="2">
                <font>
-                  <Font size="18.0" />
+                  <Font size="16.0" />
                </font>
             </Button>
             <Button layoutX="70.0" layoutY="10.0" mnemonicParsing="false" onAction="#operator" prefHeight="50.0" prefWidth="60.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0.2 0 0.2 0.2;" text="÷" GridPane.columnIndex="3">
