@@ -1,5 +1,6 @@
 # PCalculator
 
+Rebuild
 
 Show
 
