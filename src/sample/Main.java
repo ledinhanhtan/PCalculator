@@ -14,7 +14,7 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/view/calculator.fxml"));
         Parent root = loader.load();
         stage.setTitle("PCalculator");
-        stage.setScene(new Scene(root, 230, 440));
+        stage.setScene(new Scene(root, 238, 448));
         stage.setResizable(false);
         stage.show();
         stage.getIcons().add(new Image("sample/resource/icon/icon.png"));
